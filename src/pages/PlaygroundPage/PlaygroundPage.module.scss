@@ -1,0 +1,189 @@
+.page {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  border-radius: var(--radius-4xl);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: var(--shadow-xl);
+}
+
+.introText {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 64ch;
+}
+
+.sectionEyebrow {
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pageTitle {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.04em;
+}
+
+.pageDescription {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius-3xl);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow-lg);
+}
+
+.panelHeader {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.panelTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+}
+
+.panelDescription {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.demoForm {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.loadingState {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+}
+
+.exampleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.exampleCard {
+  display: grid;
+  gap: var(--space-3);
+  min-height: 180px;
+  padding: var(--space-5);
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(180deg, rgba(239, 246, 255, 0.96) 0%, rgba(255, 255, 255, 0.96) 100%);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+
+.exampleTag {
+  display: inline-flex;
+  justify-content: center;
+  width: fit-content;
+  padding: var(--space-1-5) var(--space-3);
+  border-radius: var(--radius-full);
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exampleTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+}
+
+.exampleSummary {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.modalBody {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.modalDescription {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (width <= 980px) {
+  .intro,
+  .sectionGrid,
+  .exampleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .intro {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (width <= 640px) {
+  .intro,
+  .panel {
+    padding: var(--space-5);
+  }
+
+  .buttonRow,
+  .formActions,
+  .modalActions {
+    flex-direction: column;
+  }
+}

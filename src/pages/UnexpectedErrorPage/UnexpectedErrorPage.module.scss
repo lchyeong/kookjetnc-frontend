@@ -1,0 +1,39 @@
+.page {
+  padding: var(--space-10) 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.actionLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.stackTrace {
+  max-width: 100%;
+  overflow: auto;
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  background: rgba(15, 23, 42, 0.92);
+  color: #e2e8f0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-relaxed);
+}
+
+@media (width <= 640px) {
+  .actions {
+    flex-direction: column;
+  }
+}

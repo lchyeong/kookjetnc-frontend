@@ -1,0 +1,35 @@
+.shell {
+  min-height: 100%;
+  background: #ffffff;
+  --kookje-primary: #005469;
+  --kookje-primary-soft: #8ccad6;
+}
+
+.main {
+  padding-top: 90px;
+  min-height: calc(100vh - 92px);
+}
+
+.mainFullBleed {
+  padding-top: 0;
+}
+
+.mainClipX {
+  overflow-x: hidden;
+}
+
+.mainHome {
+  padding-top: 0;
+  min-height: 100vh;
+}
+
+@media (width <= 1024px) {
+  .main {
+    padding-top: 60px;
+    min-height: calc(100vh - 80px);
+  }
+
+  .mainFullBleed {
+    padding-top: 0;
+  }
+}

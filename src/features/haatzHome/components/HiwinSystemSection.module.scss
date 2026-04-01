@@ -1,0 +1,721 @@
+.root {
+  --hiwin-brand-color: #005469;
+  --hiwin-active-rail-offset: 0px;
+  --hiwin-header-height: 90px;
+  --hiwin-slide-count: 4;
+  --hiwin-tab-track-shift: 0;
+  --hiwin-visible-tab-count: 3;
+  --hiwin-tab-step: 60px;
+  --hiwin-image-enter-distance: 100%;
+  --hiwin-motion-duration: 720ms;
+  --hiwin-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hiwin-slot-offset: 100%;
+  --hiwin-tab-enter-distance: 16px;
+  --hiwin-image-overlay: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.3) 45%,
+    rgba(0, 0, 0, 0.16) 100%
+  );
+
+  width: 100%;
+  color: #ffffff;
+}
+
+.heading {
+  width: min(1760px, calc(100vw - 40px));
+  margin: 0 auto;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  min-height: 320px;
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--hiwin-brand-color, #005469);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  margin: 0;
+  color: #242424;
+}
+
+.titleLine {
+  display: block;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--hiwin-header-height));
+  height: calc(100dvh - var(--hiwin-header-height));
+}
+
+.viewport {
+  position: relative;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.imageWrap,
+.imageList,
+.imageItem,
+.imageMedia {
+  width: 100%;
+  height: 100%;
+}
+
+.imageList,
+.activeRailTrack,
+.tabRailTrack,
+.ctaSlides {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.imageWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.imageList {
+  position: relative;
+}
+
+.imageItem {
+  position: absolute;
+  inset: 0;
+}
+
+.imageWrap,
+.imageItem,
+.activeRail {
+  pointer-events: none;
+}
+
+.imageItemCurrent {
+  z-index: 1;
+}
+
+.imageItemIncoming {
+  z-index: 2;
+}
+
+.imageMedia {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0) scale(1.01);
+  transition: transform var(--hiwin-motion-duration) var(--hiwin-motion-ease);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.imageMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--hiwin-image-overlay);
+}
+
+.root[data-motion-direction='forward'] .imageItem[data-slide-state='incoming'] .imageMedia {
+  transform: translate3d(var(--hiwin-image-enter-distance), 0, 0) scale(1.01);
+}
+
+.root[data-motion-direction='backward'] .imageItem[data-slide-state='incoming'] .imageMedia {
+  transform: translate3d(calc(var(--hiwin-image-enter-distance) * -1), 0, 0) scale(1.01);
+}
+
+.root[data-transition-phase='running'] .imageItem[data-slide-state='incoming'] .imageMedia {
+  transform: translate3d(0, 0, 0) scale(1.01);
+}
+
+.imageItem img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.desktopImage {
+  min-width: 100%;
+}
+
+.mobileImage {
+  display: none;
+}
+
+.activeRail {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  width: 60px;
+  height: calc(100% - 60px);
+  padding: 30px 0;
+  border-radius: 100px;
+  background: var(--hiwin-brand-color);
+  transform: translateY(-50%);
+}
+
+.activeRailWindow {
+  width: 25px;
+  overflow: hidden;
+}
+
+.activeRailTrack {
+  display: flex;
+  transform: translate3d(var(--hiwin-active-rail-offset), 0, 0);
+  transition: transform var(--hiwin-motion-duration) var(--hiwin-motion-ease);
+  will-change: transform;
+}
+
+.activeRailItem {
+  flex: 0 0 25px;
+  backface-visibility: hidden;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 25px;
+  writing-mode: vertical-rl;
+}
+
+.tabRail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.tabRailWindow {
+  width: calc(var(--hiwin-tab-step) * var(--hiwin-visible-tab-count));
+  height: 100%;
+  overflow: hidden;
+}
+
+.tabRailTrack {
+  display: flex;
+  width: max-content;
+  min-width: calc(var(--hiwin-tab-step) * var(--hiwin-visible-tab-count));
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate3d(calc(var(--hiwin-tab-step) * var(--hiwin-tab-track-shift) * -1), 0, 0);
+  transition: transform var(--hiwin-motion-duration) var(--hiwin-motion-ease);
+  will-change: transform;
+}
+
+.tabRailItem {
+  flex: 0 0 var(--hiwin-tab-step);
+  width: var(--hiwin-tab-step);
+  height: 100%;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tabRailItem[aria-hidden='true'] .tabButton {
+  pointer-events: none;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding-top: 45px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  writing-mode: vertical-rl;
+  transition:
+    color 0.3s ease,
+    opacity var(--hiwin-motion-duration) var(--hiwin-motion-ease),
+    transform var(--hiwin-motion-duration) var(--hiwin-motion-ease);
+}
+
+.tabRailItem[aria-hidden='false'] .tabButton {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.root[data-motion-direction='forward'] .tabRailItem[aria-hidden='true'] .tabButton {
+  opacity: 0.35;
+  transform: translate3d(var(--hiwin-tab-enter-distance), 0, 0);
+}
+
+.root[data-motion-direction='backward'] .tabRailItem[aria-hidden='true'] .tabButton {
+  opacity: 0.35;
+  transform: translate3d(calc(var(--hiwin-tab-enter-distance) * -1), 0, 0);
+}
+
+.tabButton::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: background-color 0.3s ease;
+}
+
+.tabButton:hover,
+.tabButton:focus-visible {
+  color: var(--hiwin-brand-color);
+}
+
+.textWrap {
+  position: absolute;
+  top: 38%;
+  left: 160px;
+  right: calc(var(--hiwin-tab-step) * var(--hiwin-visible-tab-count) + 80px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.textList {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: min(860px, 100%);
+  min-height: 320px;
+  pointer-events: none;
+}
+
+.textContentLayer {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.textCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.textCardAccessible {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.textCardVisual {
+  z-index: 2;
+}
+
+.textTitle {
+  margin: 0 0 20px;
+  color: #ffffff;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.textDescription {
+  margin: 0 0 55px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.descriptionLine {
+  display: block;
+}
+
+.textMotionCard {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.textMotionTitle {
+  margin: 0 0 20px;
+  font-size: 60px;
+  line-height: 1.1;
+}
+
+.textMotionDescription {
+  margin: 0 0 55px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.motionTitleWindow,
+.motionDescriptionWindow {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.motionTitleWindow {
+  height: 1.1em;
+}
+
+.motionDescriptionWindow {
+  height: calc(1.5em * var(--hiwin-description-line-count, 2));
+}
+
+.motionSlotValue {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transition: transform var(--hiwin-motion-duration) var(--hiwin-motion-ease);
+  will-change: transform;
+}
+
+.motionSlotCurrent {
+  transform: translate3d(0, 0, 0);
+}
+
+.root[data-motion-direction='forward'] .motionSlotIncoming {
+  transform: translate3d(0, var(--hiwin-slot-offset), 0);
+}
+
+.root[data-motion-direction='backward'] .motionSlotIncoming {
+  transform: translate3d(0, calc(var(--hiwin-slot-offset) * -1), 0);
+}
+
+.root[data-transition-phase='running'][data-motion-direction='forward'] .motionSlotCurrent {
+  transform: translate3d(0, calc(var(--hiwin-slot-offset) * -1), 0);
+}
+
+.root[data-transition-phase='running'][data-motion-direction='forward'] .motionSlotIncoming {
+  transform: translate3d(0, 0, 0);
+}
+
+.root[data-transition-phase='running'][data-motion-direction='backward'] .motionSlotCurrent {
+  transform: translate3d(0, var(--hiwin-slot-offset), 0);
+}
+
+.root[data-transition-phase='running'][data-motion-direction='backward'] .motionSlotIncoming {
+  transform: translate3d(0, 0, 0);
+}
+
+.motionTitleValue {
+  color: #ffffff;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.motionDescriptionBlock {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.motionDescriptionLine {
+  display: block;
+}
+
+.cta {
+  display: block;
+  width: 200px;
+  height: 60px;
+  pointer-events: auto;
+}
+
+.ctaPending {
+  pointer-events: none;
+}
+
+.ctaLink {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.ctaLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--hiwin-brand-color);
+  border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.ctaSlides {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  transition: right 0.4s;
+}
+
+.ctaLink:hover .ctaSlides,
+.ctaLink:focus-visible .ctaSlides {
+  right: -100%;
+}
+
+.ctaSlide {
+  display: flex;
+  flex: 0 1 220px;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 100%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.ctaSlidePrimary {
+  background: var(--hiwin-brand-color);
+}
+
+.ctaSlideSecondary {
+  background: transparent;
+}
+
+.ctaIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.ctaLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (width <= 1540px) {
+  .textTitle,
+  .textMotionTitle,
+  .motionTitleValue {
+    font-size: 48px;
+  }
+}
+
+@media (width <= 1360px) {
+  .tabButton,
+  .activeRailItem {
+    font-size: 18px;
+  }
+
+  .textTitle,
+  .textMotionTitle,
+  .motionTitleValue {
+    font-size: 40px;
+  }
+
+  .textTitle,
+  .textMotionTitle {
+    margin-bottom: 10px;
+  }
+
+  .textDescription,
+  .textMotionDescription,
+  .motionDescriptionBlock {
+    font-size: 16px;
+  }
+
+  .textDescription,
+  .textMotionDescription {
+    margin-bottom: 30px;
+  }
+
+  .cta {
+    width: 150px;
+    height: 48px;
+  }
+
+  .ctaSlides {
+    width: 300px;
+  }
+
+  .ctaSlide {
+    flex-basis: 170px;
+    width: 170px;
+    font-size: 16px;
+  }
+}
+
+@media (width <= 1024px) {
+  .root {
+    --hiwin-header-height: 60px;
+    --hiwin-tab-step: 44px;
+    --hiwin-tab-enter-distance: 10px;
+  }
+
+  .heading {
+    width: min(100vw - 32px, 1760px);
+    gap: 4px;
+    min-height: 220px;
+  }
+
+  .eyebrow {
+    font-size: 14px;
+  }
+
+  .title {
+    margin-top: 0;
+  }
+
+  .titleLine {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .activeRail {
+    top: 120px;
+    bottom: auto;
+    left: 20px;
+    width: 44px;
+    height: calc(100% - 130px);
+    padding: 40px 0 20px;
+    transform: none;
+  }
+
+  .activeRailItem {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .tabRail {
+    right: -44px;
+  }
+
+  .tabButton {
+    padding-top: 120px;
+    font-size: 14px;
+  }
+
+  .textWrap {
+    left: 100px;
+    right: auto;
+    display: block;
+    width: 200px;
+  }
+
+  .textList {
+    width: 200px;
+    min-height: 240px;
+  }
+
+  .textContentLayer {
+    min-height: 192px;
+  }
+
+  .textTitle,
+  .textMotionTitle,
+  .motionTitleValue {
+    font-size: 20px;
+  }
+
+  .textTitle,
+  .textMotionTitle {
+    margin-bottom: 4px;
+  }
+
+  .textDescription,
+  .textMotionDescription,
+  .motionDescriptionBlock {
+    font-size: 13px;
+    word-break: keep-all;
+  }
+
+  .textDescription,
+  .textMotionDescription {
+    margin-bottom: 20px;
+  }
+
+  .ctaIcon {
+    width: 20px;
+    height: auto;
+  }
+
+  .ctaIcon svg {
+    width: 20px;
+    height: auto;
+  }
+
+  .ctaLabel {
+    font-size: 14px;
+  }
+
+  .imageItem .desktopImage {
+    display: none;
+  }
+
+  .imageItem .mobileImage {
+    display: block;
+  }
+}
+
+@media (width <= 768px) {
+  .heading {
+    min-height: 200px;
+  }
+
+  .textWrap {
+    left: 90px;
+    width: 200px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imageMedia,
+  .activeRailTrack,
+  .tabRailTrack,
+  .tabButton,
+  .motionSlotValue,
+  .ctaLink,
+  .ctaSlides {
+    transition: none;
+  }
+}
