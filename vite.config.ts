@@ -18,11 +18,11 @@
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-// @vitejs/plugin-react-swc: React를 SWC 컴파일러로 변환하는 플러그인
-// SWC는 Rust로 작성되어 기존 Babel보다 5~10배 빠른 컴파일 속도를 제공합니다
+// @vitejs/plugin-react: React용 공식 Vite 플러그인
+// Fast Refresh와 JSX 변환을 제공하며, 현재 Vite 8의 기본 권장 경로입니다
 
 // ============================================
 // __dirname 상수 정의
@@ -329,16 +329,15 @@ export default defineConfig(({ mode }) => {
           // - 전체 번들: app.js (500KB)
           // - 분리 후: react.js (150KB) + app.js (350KB)
           // → React 라이브러리는 캐시에 저장되어 다음 방문 시 다운로드 불필요
-          manualChunks: {
-            // React 관련 라이브러리를 react.js 파일로 분리
-            react: ['react', 'react-dom'],
+          manualChunks(moduleId) {
+            if (
+              moduleId.includes('/node_modules/react/') ||
+              moduleId.includes('/node_modules/react-dom/')
+            ) {
+              return 'react';
+            }
 
-            // 추가 라이브러리 분리 예시 (라이브러리 설치 후 주석 해제)
-            // React Router를 router.js 파일로 분리
-            // router: ['react-router-dom'],
-
-            // UI 라이브러리를 ui.js 파일로 분리
-            // ui: ['@mui/material', '@emotion/react'],
+            return undefined;
           },
         },
       },
@@ -354,22 +353,6 @@ export default defineConfig(({ mode }) => {
       // - 무거운 라이브러리는 동적 import 사용
       // - 불필요한 의존성 제거
       chunkSizeWarningLimit: 500,
-    },
-
-    // ============================================
-    // esbuild 설정
-    // ============================================
-    esbuild: {
-      // 프로덕션 빌드 시 제거할 코드 지정
-      // mode === 'production'일 때만 console과 debugger 제거
-      //
-      // 왜 제거하나?
-      // 1. console.log()는 프로덕션에서 불필요한 성능 오버헤드
-      // 2. 민감한 정보가 로그에 노출될 수 있는 보안 위험
-      // 3. debugger 문은 브라우저 개발자 도구를 여는 코드 (사용자에게 불필요)
-      //
-      // 개발 모드에서는 빈 배열 []이므로 제거하지 않음
-      drop: mode === 'production' ? ['console', 'debugger'] : [],
     },
 
     // ============================================

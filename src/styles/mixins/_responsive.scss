@@ -73,8 +73,8 @@ $breakpoints: (
     @error "Unknown breakpoint(max) `#{$max}`. Use one of: #{map.keys($breakpoints)} (or pass a length like `900px`).";
   }
 
-  $min-value: if($min-size != null, $min-size, $min);
-  $max-value: if($max-size != null, $max-size, $max);
+  $min-value: if(sass($min-size != null): $min-size; else: $min);
+  $max-value: if(sass($max-size != null): $max-size; else: $max);
 
   @if $max-value == 0 {
     @error "mq-between의 max는 0일 수 없습니다. 예: `mq-between(xs, sm)` 또는 `mq-between(sm, md)`";

@@ -159,6 +159,7 @@
 
     // 경로 별칭의 기준 디렉토리
     // "." = 프로젝트 루트 (package.json이 있는 곳)
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
 
     // import 경로 단축 매핑

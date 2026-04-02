@@ -20,6 +20,18 @@ export const routePaths = {
   catalogDetail: (categorySlug: CatalogCategorySlug, itemSlug: string) => {
     return `/${categorySlug}/${itemSlug}`;
   },
+  notices: '/notice',
+  noticeDetail: (noticeId: number | string) => `/notice/${noticeId}`,
+  resources: '/resources',
+  resourceDetail: (resourceId: number | string) => `/resources/${resourceId}`,
+  admin: '/admin',
+  adminLogin: '/admin/login',
+  adminNotices: '/admin/notices',
+  adminNoticeCreate: '/admin/notices/new',
+  adminNoticeEdit: (noticeId: number | string) => `/admin/notices/${noticeId}/edit`,
+  adminResources: '/admin/resources',
+  adminResourceCreate: '/admin/resources/new',
+  adminResourceEdit: (resourceId: number | string) => `/admin/resources/${resourceId}/edit`,
 } as const;
 
 export const catalogCategoryPaths = [

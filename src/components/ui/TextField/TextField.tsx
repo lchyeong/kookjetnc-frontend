@@ -43,8 +43,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 TextField.displayName = 'TextField';
 
 export interface TextAreaFieldProps
-  extends BaseFieldProps,
-    TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  extends BaseFieldProps, TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>(
   ({ className, errorMessage, id, label, ...rest }, ref) => {
