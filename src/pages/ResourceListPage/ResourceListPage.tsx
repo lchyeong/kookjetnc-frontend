@@ -3,14 +3,9 @@ import { Link } from 'react-router-dom';
 
 import PlaceholderPage from '@/components/layout/PlaceholderPage/PlaceholderPage';
 import { boardQueryKeys, fetchResources } from '@/features/board/api';
-import {
-  formatFileSize,
-  formatPublishedDate,
-  getApiErrorMessage,
-} from '@/features/board/utils';
-import { routePaths } from '@/routes/routeRegistry';
-
+import { formatFileSize, formatPublishedDate, getApiErrorMessage } from '@/features/board/utils';
 import styles from '@/pages/PageContent.module.scss';
+import { routePaths } from '@/routes/routeRegistry';
 
 const ResourceListPage = () => {
   const resourceQuery = useQuery({
@@ -38,6 +33,8 @@ const ResourceListPage = () => {
     );
   }
 
+  const resources = resourceQuery.data ?? [];
+
   return (
     <div className={styles['page']}>
       <section className={styles['hero']}>
@@ -49,20 +46,18 @@ const ResourceListPage = () => {
       </section>
 
       <section className={styles['list']}>
-        {resourceQuery.data.length === 0 ? (
+        {resources.length === 0 ? (
           <article className={styles['card']}>
             <p className={styles['description']}>등록된 자료가 없습니다.</p>
           </article>
         ) : null}
 
-        {resourceQuery.data.map((resource) => (
+        {resources.map((resource) => (
           <article className={styles['card']} key={resource.id}>
             <div className={styles['splitActions']}>
               <div className={styles['actions']}>
                 <span className={styles['pill']}>{resource.category}</span>
-                <span className={styles['meta']}>
-                  {formatPublishedDate(resource.publishedAt)}
-                </span>
+                <span className={styles['meta']}>{formatPublishedDate(resource.publishedAt)}</span>
               </div>
               <span className={styles['meta']}>
                 {resource.fileName} · {formatFileSize(resource.fileSize)}

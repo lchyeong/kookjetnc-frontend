@@ -3,20 +3,22 @@ import { Link, useParams } from 'react-router-dom';
 
 import PlaceholderPage from '@/components/layout/PlaceholderPage/PlaceholderPage';
 import { boardQueryKeys, fetchResource } from '@/features/board/api';
-import {
-  formatFileSize,
-  formatPublishedDate,
-  getApiErrorMessage,
-} from '@/features/board/utils';
-import { routePaths } from '@/routes/routeRegistry';
-
+import { formatFileSize, formatPublishedDate, getApiErrorMessage } from '@/features/board/utils';
 import styles from '@/pages/PageContent.module.scss';
+import { routePaths } from '@/routes/routeRegistry';
 
 const ResourceDetailPage = () => {
   const { resourceId } = useParams();
   const resolvedResourceId = Number(resourceId);
+  const isValidResourceId = Boolean(resourceId) && !Number.isNaN(resolvedResourceId);
 
-  if (!resourceId || Number.isNaN(resolvedResourceId)) {
+  const resourceQuery = useQuery({
+    enabled: isValidResourceId,
+    queryKey: boardQueryKeys.resource(resolvedResourceId),
+    queryFn: () => fetchResource(resolvedResourceId),
+  });
+
+  if (!isValidResourceId) {
     return (
       <PlaceholderPage
         description='자료 식별자가 전달되지 않았습니다.'
@@ -25,11 +27,6 @@ const ResourceDetailPage = () => {
       />
     );
   }
-
-  const resourceQuery = useQuery({
-    queryKey: boardQueryKeys.resource(resolvedResourceId),
-    queryFn: () => fetchResource(resolvedResourceId),
-  });
 
   if (resourceQuery.isLoading) {
     return (
@@ -53,6 +50,17 @@ const ResourceDetailPage = () => {
   }
 
   const resource = resourceQuery.data;
+
+  if (!resource) {
+    return (
+      <PlaceholderPage
+        description='자료 데이터를 찾지 못했습니다.'
+        eyebrow='Resources'
+        secondary={<Link to={routePaths.resources}>자료실 목록으로 돌아가기</Link>}
+        title='자료를 불러오지 못했습니다.'
+      />
+    );
+  }
 
   return (
     <article className={styles['page']}>

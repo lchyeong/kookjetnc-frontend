@@ -10,9 +10,14 @@ const createCatalogCategoryPath = (categorySlug: CatalogCategorySlug) => {
   return `/${categorySlug}`;
 };
 
+const stringifyRouteParam = (value: number | string) => {
+  return String(value);
+};
+
 export const routePaths = {
   aboutHistory: '/about/history',
   aboutCertification: '/about/certification',
+  aboutOrganization: '/about/organization',
   home: '/',
   energySolution: createCatalogCategoryPath('energy-solution'),
   mechanicalHvac: createCatalogCategoryPath('mechanical-hvac'),
@@ -22,17 +27,19 @@ export const routePaths = {
     return `/${categorySlug}/${itemSlug}`;
   },
   notices: '/notice',
-  noticeDetail: (noticeId: number | string) => `/notice/${noticeId}`,
+  noticeDetail: (noticeId: number | string) => `/notice/${stringifyRouteParam(noticeId)}`,
   resources: '/resources',
-  resourceDetail: (resourceId: number | string) => `/resources/${resourceId}`,
+  resourceDetail: (resourceId: number | string) => `/resources/${stringifyRouteParam(resourceId)}`,
   admin: '/admin',
   adminLogin: '/admin/login',
   adminNotices: '/admin/notices',
   adminNoticeCreate: '/admin/notices/new',
-  adminNoticeEdit: (noticeId: number | string) => `/admin/notices/${noticeId}/edit`,
+  adminNoticeEdit: (noticeId: number | string) =>
+    `/admin/notices/${stringifyRouteParam(noticeId)}/edit`,
   adminResources: '/admin/resources',
   adminResourceCreate: '/admin/resources/new',
-  adminResourceEdit: (resourceId: number | string) => `/admin/resources/${resourceId}/edit`,
+  adminResourceEdit: (resourceId: number | string) =>
+    `/admin/resources/${stringifyRouteParam(resourceId)}/edit`,
 } as const;
 
 export const catalogCategoryPaths = [

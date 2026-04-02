@@ -4,6 +4,7 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import AdminRouteLayout from '@/features/board/AdminRouteLayout';
 import AboutCertificationPage from '@/pages/AboutCertificationPage/AboutCertificationPage';
 import AboutHistoryPage from '@/pages/AboutHistoryPage/AboutHistoryPage';
+import AboutOrganizationPage from '@/pages/AboutOrganizationPage/AboutOrganizationPage';
 import AdminLoginPage from '@/pages/AdminLoginPage/AdminLoginPage';
 import AdminNoticeFormPage from '@/pages/AdminNoticeFormPage/AdminNoticeFormPage';
 import AdminNoticeListPage from '@/pages/AdminNoticeListPage/AdminNoticeListPage';
@@ -38,6 +39,10 @@ export const appRoutes: RouteObject[] = [
       {
         path: 'about/certification',
         element: <AboutCertificationPage />,
+      },
+      {
+        path: 'about/organization',
+        element: <AboutOrganizationPage />,
       },
       {
         path: routePaths.energySolution.slice(1),

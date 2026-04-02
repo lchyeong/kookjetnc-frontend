@@ -85,6 +85,23 @@ describe('router', () => {
     expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
   });
 
+  it('renders the internal about organization route', () => {
+    renderRoute('/about/organization');
+
+    expect(
+      screen.getByRole('heading', {
+        name: '전문 기술인력이 유기적으로 연결된 국제티엔씨의 조직 구조',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('기술 노하우와 다양한 경험을 보유한 전문인력으로 조직을 운영합니다.'),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('about-organization-group-mechanical-equipment')).toBeInTheDocument();
+    expect(screen.getByTestId('about-organization-capability-partners')).toBeInTheDocument();
+    expect(document.querySelector('main')).toHaveClass(styles['main'], styles['mainFullBleed']);
+    expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
+  });
+
   it('renders the energy solution catalog route with the shared quick menu', () => {
     renderRoute(routePaths.energySolution);
 

@@ -122,6 +122,8 @@ describe('haatz header menu data', () => {
         const historyItem = group.items.find((item) => item.label === '경영이념·연혁');
         const certificationHoverItem = group.hoverItems.find((item) => item.label === '인증·특허');
         const certificationItem = group.items.find((item) => item.label === '인증·특허');
+        const organizationHoverItem = group.hoverItems.find((item) => item.label === '조직도');
+        const organizationItem = group.items.find((item) => item.label === '조직도');
 
         expect(historyHoverItem).toMatchObject({
           href: routePaths.aboutHistory,
@@ -143,14 +145,34 @@ describe('haatz header menu data', () => {
           label: '인증·특허',
           to: routePaths.aboutCertification,
         });
+        expect(organizationHoverItem).toMatchObject({
+          href: routePaths.aboutOrganization,
+          label: '조직도',
+          to: routePaths.aboutOrganization,
+        });
+        expect(organizationItem).toMatchObject({
+          href: routePaths.aboutOrganization,
+          label: '조직도',
+          to: routePaths.aboutOrganization,
+        });
         expect(
           group.hoverItems
-            .filter((item) => item.label !== '경영이념·연혁' && item.label !== '인증·특허')
+            .filter(
+              (item) =>
+                item.label !== '경영이념·연혁' &&
+                item.label !== '인증·특허' &&
+                item.label !== '조직도',
+            )
             .every((item) => item.href === '#' && item.isPlaceholder),
         ).toBe(true);
         expect(
           group.items
-            .filter((item) => item.label !== '경영이념·연혁' && item.label !== '인증·특허')
+            .filter(
+              (item) =>
+                item.label !== '경영이념·연혁' &&
+                item.label !== '인증·특허' &&
+                item.label !== '조직도',
+            )
             .every((item) => item.href === '#' && item.isPlaceholder),
         ).toBe(true);
         continue;

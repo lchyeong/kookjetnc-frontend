@@ -1,10 +1,9 @@
-import type { FormEvent } from 'react';
+import type { SyntheticEvent } from 'react';
 import { useEffect, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
 
-import PlaceholderPage from '@/components/layout/PlaceholderPage/PlaceholderPage';
 import Button from '@/components/ui/Button/Button';
 import { loginAdmin } from '@/features/board/api';
 import { hasAdminAccessToken, setAdminAccessToken } from '@/features/board/auth';
@@ -22,7 +21,7 @@ const AdminLoginPage = () => {
     mutationFn: loginAdmin,
     onSuccess: (response) => {
       setAdminAccessToken(response.accessToken);
-      navigate(routePaths.adminNotices, { replace: true });
+      void navigate(routePaths.adminNotices, { replace: true });
     },
     onError: (error) => {
       setErrorMessage(getApiErrorMessage(error));
@@ -31,11 +30,11 @@ const AdminLoginPage = () => {
 
   useEffect(() => {
     if (hasAdminAccessToken()) {
-      navigate(routePaths.adminNotices, { replace: true });
+      void navigate(routePaths.adminNotices, { replace: true });
     }
   }, [navigate]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
     loginMutation.mutate({ username, password });
@@ -59,7 +58,9 @@ const AdminLoginPage = () => {
               <input
                 className={styles['input']}
                 id='username'
-                onChange={(event) => setUsername(event.target.value)}
+                onChange={(event) => {
+                  setUsername(event.target.value);
+                }}
                 value={username}
               />
             </div>
@@ -71,7 +72,9 @@ const AdminLoginPage = () => {
               <input
                 className={styles['input']}
                 id='password'
-                onChange={(event) => setPassword(event.target.value)}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
                 type='password'
                 value={password}
               />

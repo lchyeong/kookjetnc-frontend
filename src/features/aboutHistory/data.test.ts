@@ -81,5 +81,10 @@ describe('about history data', () => {
       label: '인증·특허',
       to: '/about/certification',
     });
+    expect(historySecondarySubNavLinks[3]).toMatchObject({
+      href: '/about/organization',
+      label: '조직도',
+      to: '/about/organization',
+    });
   });
 });

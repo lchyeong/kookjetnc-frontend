@@ -34,6 +34,11 @@ describe('about certification data', () => {
       label: '인증·특허',
       to: '/about/certification',
     });
+    expect(certificationSecondarySubNavLinks[3]).toMatchObject({
+      href: '/about/organization',
+      label: '조직도',
+      to: '/about/organization',
+    });
   });
 
   it('builds 12 certification entries and 9 patent-design entries', () => {

@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import PlaceholderPage from '@/components/layout/PlaceholderPage/PlaceholderPage';
 import { boardQueryKeys, fetchNotices } from '@/features/board/api';
 import { formatPublishedDate, getApiErrorMessage } from '@/features/board/utils';
-import { routePaths } from '@/routes/routeRegistry';
-
 import styles from '@/pages/PageContent.module.scss';
+import { routePaths } from '@/routes/routeRegistry';
 
 const NoticeListPage = () => {
   const noticeQuery = useQuery({
@@ -34,6 +33,8 @@ const NoticeListPage = () => {
     );
   }
 
+  const notices = noticeQuery.data ?? [];
+
   return (
     <div className={styles['page']}>
       <section className={styles['hero']}>
@@ -45,13 +46,13 @@ const NoticeListPage = () => {
       </section>
 
       <section className={styles['list']}>
-        {noticeQuery.data.length === 0 ? (
+        {notices.length === 0 ? (
           <article className={styles['card']}>
             <p className={styles['description']}>등록된 공지사항이 없습니다.</p>
           </article>
         ) : null}
 
-        {noticeQuery.data.map((notice) => (
+        {notices.map((notice) => (
           <article className={styles['card']} key={notice.id}>
             <div className={styles['actions']}>
               {notice.isPinned ? <span className={styles['pill']}>고정 공지</span> : null}

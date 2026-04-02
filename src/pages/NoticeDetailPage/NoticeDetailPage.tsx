@@ -4,15 +4,21 @@ import { Link, useParams } from 'react-router-dom';
 import PlaceholderPage from '@/components/layout/PlaceholderPage/PlaceholderPage';
 import { boardQueryKeys, fetchNotice } from '@/features/board/api';
 import { formatPublishedDate, getApiErrorMessage } from '@/features/board/utils';
-import { routePaths } from '@/routes/routeRegistry';
-
 import styles from '@/pages/PageContent.module.scss';
+import { routePaths } from '@/routes/routeRegistry';
 
 const NoticeDetailPage = () => {
   const { noticeId } = useParams();
   const resolvedNoticeId = Number(noticeId);
+  const isValidNoticeId = Boolean(noticeId) && !Number.isNaN(resolvedNoticeId);
 
-  if (!noticeId || Number.isNaN(resolvedNoticeId)) {
+  const noticeQuery = useQuery({
+    enabled: isValidNoticeId,
+    queryKey: boardQueryKeys.notice(resolvedNoticeId),
+    queryFn: () => fetchNotice(resolvedNoticeId),
+  });
+
+  if (!isValidNoticeId) {
     return (
       <PlaceholderPage
         description='공지사항 식별자가 전달되지 않았습니다.'
@@ -21,11 +27,6 @@ const NoticeDetailPage = () => {
       />
     );
   }
-
-  const noticeQuery = useQuery({
-    queryKey: boardQueryKeys.notice(resolvedNoticeId),
-    queryFn: () => fetchNotice(resolvedNoticeId),
-  });
 
   if (noticeQuery.isLoading) {
     return (
@@ -49,6 +50,17 @@ const NoticeDetailPage = () => {
   }
 
   const notice = noticeQuery.data;
+
+  if (!notice) {
+    return (
+      <PlaceholderPage
+        description='공지사항 데이터를 찾지 못했습니다.'
+        eyebrow='Notice'
+        secondary={<Link to={routePaths.notices}>공지사항 목록으로 돌아가기</Link>}
+        title='공지사항을 불러오지 못했습니다.'
+      />
+    );
+  }
 
   return (
     <article className={styles['page']}>

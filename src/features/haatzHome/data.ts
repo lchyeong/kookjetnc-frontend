@@ -129,7 +129,12 @@ const companyLinksWithHistoryRoute = [
     label: '인증·특허',
     to: routePaths.aboutCertification,
   },
-  ...companyPlaceholderLinks.slice(2),
+  {
+    href: routePaths.aboutOrganization,
+    label: '조직도',
+    to: routePaths.aboutOrganization,
+  },
+  companyPlaceholderLinks[3],
 ];
 
 export const headerMenuGroups: HeaderMenuGroup[] = [

@@ -13,6 +13,7 @@ import { Link, NavigationType, useNavigationType } from 'react-router-dom';
 import homeIcon from '@/assets/icons/icon_home.svg';
 import ChevronDownIcon from '@/components/ui/icons/ChevronDownIcon';
 import {
+  certificationArchiveBackgroundSrc,
   certificationCategoryMarkers,
   certificationEntries,
   certificationHeroContent,
@@ -490,6 +491,10 @@ const AboutCertification = () => {
         data-testid='about-certification-archive-section'
         ref={archiveSectionRef}
       >
+        <div aria-hidden='true' className={styles['archiveBackdrop']}>
+          <img alt='' src={certificationArchiveBackgroundSrc} />
+        </div>
+
         <div
           className={styles['archiveInner']}
           data-testid='about-certification-archive-inner'
