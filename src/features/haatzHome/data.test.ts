@@ -104,7 +104,7 @@ describe('haatz header menu data', () => {
     ]);
   });
 
-  it('keeps the current header groups structure while exposing the catalog routes and history page as internal routes', () => {
+  it('keeps the current header groups structure while exposing the catalog routes and company pages as internal routes', () => {
     expect(headerMenuGroups).toHaveLength(5);
 
     for (const group of headerMenuGroups) {
@@ -120,6 +120,8 @@ describe('haatz header menu data', () => {
 
         const historyHoverItem = group.hoverItems.find((item) => item.label === '경영이념·연혁');
         const historyItem = group.items.find((item) => item.label === '경영이념·연혁');
+        const certificationHoverItem = group.hoverItems.find((item) => item.label === '인증·특허');
+        const certificationItem = group.items.find((item) => item.label === '인증·특허');
 
         expect(historyHoverItem).toMatchObject({
           href: routePaths.aboutHistory,
@@ -131,14 +133,24 @@ describe('haatz header menu data', () => {
           label: '경영이념·연혁',
           to: routePaths.aboutHistory,
         });
+        expect(certificationHoverItem).toMatchObject({
+          href: routePaths.aboutCertification,
+          label: '인증·특허',
+          to: routePaths.aboutCertification,
+        });
+        expect(certificationItem).toMatchObject({
+          href: routePaths.aboutCertification,
+          label: '인증·특허',
+          to: routePaths.aboutCertification,
+        });
         expect(
           group.hoverItems
-            .filter((item) => item.label !== '경영이념·연혁')
+            .filter((item) => item.label !== '경영이념·연혁' && item.label !== '인증·특허')
             .every((item) => item.href === '#' && item.isPlaceholder),
         ).toBe(true);
         expect(
           group.items
-            .filter((item) => item.label !== '경영이념·연혁')
+            .filter((item) => item.label !== '경영이념·연혁' && item.label !== '인증·특허')
             .every((item) => item.href === '#' && item.isPlaceholder),
         ).toBe(true);
         continue;

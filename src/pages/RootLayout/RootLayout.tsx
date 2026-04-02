@@ -21,9 +21,10 @@ const RootLayout = () => {
   const location = useLocation();
   const navigationType = useNavigationType();
   const isAboutHistoryRoute = location.pathname === routePaths.aboutHistory;
+  const isAboutCertificationRoute = location.pathname === routePaths.aboutCertification;
   const isHomeRoute = location.pathname === routePaths.home;
   const isCatalogPageRoute = isCatalogRoute(location.pathname);
-  const isFullBleedRoute = isHomeRoute || isAboutHistoryRoute;
+  const isFullBleedRoute = isHomeRoute || isAboutHistoryRoute || isAboutCertificationRoute;
   const shouldClipMainX = isHomeRoute;
   const shouldShowQuickMenu = isHomeRoute || isCatalogPageRoute;
   const introPhase = useHaatzHomeUiStore((state) => state.introPhase);

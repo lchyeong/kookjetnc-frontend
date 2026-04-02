@@ -12,6 +12,7 @@ const createCatalogCategoryPath = (categorySlug: CatalogCategorySlug) => {
 
 export const routePaths = {
   aboutHistory: '/about/history',
+  aboutCertification: '/about/certification',
   home: '/',
   energySolution: createCatalogCategoryPath('energy-solution'),
   mechanicalHvac: createCatalogCategoryPath('mechanical-hvac'),

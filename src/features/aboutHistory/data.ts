@@ -71,7 +71,7 @@ export const historyTimelineBackgroundSrc = historyAsset('/background/history1-b
 export const historySecondarySubNavLinks: HistorySubNavLink[] = [
   createHistoryPlaceholderLink('CEO인사말'),
   createHistoryInternalLink(routePaths.aboutHistory, '경영이념·연혁'),
-  createHistoryPlaceholderLink('인증·특허'),
+  createHistoryInternalLink(routePaths.aboutCertification, '인증·특허'),
   createHistoryPlaceholderLink('조직도'),
   createHistoryPlaceholderLink('사업장 위치'),
 ];

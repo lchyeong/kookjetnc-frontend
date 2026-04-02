@@ -76,5 +76,10 @@ describe('about history data', () => {
       label: '경영이념·연혁',
       to: '/about/history',
     });
+    expect(historySecondarySubNavLinks[2]).toMatchObject({
+      href: '/about/certification',
+      label: '인증·특허',
+      to: '/about/certification',
+    });
   });
 });

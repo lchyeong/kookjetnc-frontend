@@ -73,6 +73,18 @@ describe('router', () => {
     expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
   });
 
+  it('renders the internal about certification route', () => {
+    renderRoute('/about/certification');
+
+    expect(
+      screen.getByRole('heading', { name: '국제티엔씨가 축적해 온 인증과 권리의 흐름' }),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('about-certification-category-certification')).toBeInTheDocument();
+    expect(screen.queryByTestId('about-certification-current-panel')).not.toBeInTheDocument();
+    expect(document.querySelector('main')).toHaveClass(styles['main'], styles['mainFullBleed']);
+    expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
+  });
+
   it('renders the energy solution catalog route with the shared quick menu', () => {
     renderRoute(routePaths.energySolution);
 

@@ -2,6 +2,7 @@ import type { RouteObject } from 'react-router-dom';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import AdminRouteLayout from '@/features/board/AdminRouteLayout';
+import AboutCertificationPage from '@/pages/AboutCertificationPage/AboutCertificationPage';
 import AboutHistoryPage from '@/pages/AboutHistoryPage/AboutHistoryPage';
 import AdminLoginPage from '@/pages/AdminLoginPage/AdminLoginPage';
 import AdminNoticeFormPage from '@/pages/AdminNoticeFormPage/AdminNoticeFormPage';
@@ -11,9 +12,9 @@ import AdminResourceListPage from '@/pages/AdminResourceListPage/AdminResourceLi
 import CatalogCategoryPage from '@/pages/CatalogCategoryPage/CatalogCategoryPage';
 import CatalogDetailPage from '@/pages/CatalogDetailPage/CatalogDetailPage';
 import HomePage from '@/pages/HomePage/HomePage';
+import NotFoundPage from '@/pages/NotFoundPage/NotFoundPage';
 import NoticeDetailPage from '@/pages/NoticeDetailPage/NoticeDetailPage';
 import NoticeListPage from '@/pages/NoticeListPage/NoticeListPage';
-import NotFoundPage from '@/pages/NotFoundPage/NotFoundPage';
 import ResourceDetailPage from '@/pages/ResourceDetailPage/ResourceDetailPage';
 import ResourceListPage from '@/pages/ResourceListPage/ResourceListPage';
 import RootLayout from '@/pages/RootLayout/RootLayout';
@@ -33,6 +34,10 @@ export const appRoutes: RouteObject[] = [
       {
         path: 'about/history',
         element: <AboutHistoryPage />,
+      },
+      {
+        path: 'about/certification',
+        element: <AboutCertificationPage />,
       },
       {
         path: routePaths.energySolution.slice(1),
