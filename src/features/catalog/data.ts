@@ -2,7 +2,7 @@ import heroImage01 from '@/assets/images/1번이미지.jpg';
 import heroImage02 from '@/assets/images/2번이미지.jpg';
 import heroImage03 from '@/assets/images/3번이미지.jpg';
 import heroImage04 from '@/assets/images/4번이미지.jpg';
-import co2MultiSystemImage from '@/assets/images/energy/co2/co2_multi_system.png';
+import { energyImages } from '@/assets/images/energy';
 import productImage01 from '@/assets/images/products/1.직결팬.png';
 import productImage10 from '@/assets/images/products/10.유니트쿨러.png';
 import productImage11 from '@/assets/images/products/11.패널시스템.png';
@@ -23,6 +23,7 @@ import type {
   CatalogFilterGroup,
   CatalogGalleryImage,
   CatalogMetric,
+  CatalogSeriesTab,
   CatalogTab,
 } from '@/features/catalog/types';
 import type { CatalogCategorySlug } from '@/routes/routeRegistry';
@@ -46,6 +47,7 @@ interface CatalogCardSeed {
   imageSrc: string;
   metrics: CatalogMetric[];
   model: string;
+  seriesTabs?: CatalogSeriesTab[];
   summary: string;
   tabId: string;
   tags: string[];
@@ -240,7 +242,7 @@ const energyCards: CatalogCard[] = [
       '리테일 매장과 저온 물류센터의 냉동·냉장 부하를 함께 고려해 친환경 전환과 고효율 운전을 동시에 설계하는 자연냉매 시스템입니다.',
     detailDescription:
       '고효율 압축 유닛과 현장 운영 데이터 기반 제어 로직을 조합해 매장과 물류 거점의 냉동·냉장 부하를 세밀하게 제어합니다. 기존 HFC 기반 설비 교체 단계부터 자연냉매 전환 로드맵, 냉매 회수 안정성, 구역별 부하 밸런스까지 함께 설계할 수 있도록 구성했습니다.',
-    imageSrc: co2MultiSystemImage,
+    imageSrc: energyImages.co2.multiSystem,
     imageAlt: '자연냉매(CO2) 냉동냉장 멀티 시스템 이미지',
     tags: ['#친환경', '#자연냉매', '#에너지절감'],
     highlights: [
@@ -257,9 +259,9 @@ const energyCards: CatalogCard[] = [
     ],
     gallery: createGallery(
       '자연냉매(CO2) 냉동냉장 멀티 시스템',
-      { src: co2MultiSystemImage },
-      { src: co2MultiSystemImage },
-      { src: co2MultiSystemImage },
+      { src: energyImages.co2.multiSystem },
+      { src: energyImages.co2.multiSystem },
+      { src: energyImages.co2.multiSystem },
     ),
     detailImages: createCo2DetailImages('자연냉매(CO2) 냉동냉장 멀티 시스템'),
     filters: {
@@ -272,65 +274,237 @@ const energyCards: CatalogCard[] = [
     id: 'gutner-unit-cooler-high-flow',
     tabId: 'gutner-unit-cooler',
     title: '구트너 유니트 쿨러',
-    model: 'ES-GUC-480',
+    model: 'GACC · GASC · GADC · GACV',
     summary:
-      '저온 저장 공간의 온도 편차를 줄이고 풍량 밸런스를 안정적으로 유지하도록 설계한 유니트 쿨러입니다.',
+      '식품 냉동·냉장 공간의 위생 기준, 풍량 방향, 설치 공간 제약에 맞춰 선택할 수 있는 Güntner 에어쿨러 제품군입니다.',
     detailDescription:
-      '저온 저장실 전역의 온도 편차를 줄이도록 코일 성능과 팬 운전을 조합한 고풍량 유니트 쿨러입니다. 세척성과 점검 접근성을 높여 장기 운영에 적합하도록 설계했습니다.',
-    imageSrc: productImage10,
+      '군트너 에어쿨러는 HACCP 위생 대응, Eurovent 및 TUV/PED 기반의 성능·안전 기준, 부식 방지 소재 옵션을 공통 기반으로 두고 설치 공간과 냉기 분포 방식에 따라 모델을 나눕니다. 저장고와 워크인 공간 중심의 GACC, 슬림 설치가 필요한 GASC, 양방향 토출이 필요한 GADC, 폭넓은 사양 선택이 가능한 GACV로 운영 조건에 맞춰 선택할 수 있도록 구성했습니다.',
+    imageSrc: energyImages.guntner.gallery.gacc01,
     imageAlt: '구트너 유니트 쿨러 이미지',
-    tags: ['#유니트쿨러', '#저온창고', '#온도균일'],
+    tags: ['#군트너', '#유니트쿨러', '#HACCP'],
     highlights: [
-      '저온 저장 구간 전역에 균일한 송풍을 전달하는 풍량 설계',
-      '현장 세척 동선을 고려한 유지관리 접근성',
-      '냉매 시스템 및 제상 로직과 연동 가능한 운전 인터페이스',
+      'HACCP 위생 인증 기반의 식품 안전 재질과 손쉬운 세척 구조를 공통 전제로 둔 Güntner 에어쿨러 제품군입니다.',
+      'Eurovent 멤버십과 TUV/PED 대응 기준을 바탕으로 성능 검증과 압력 장비 기준을 함께 고려합니다.',
+      '냉동·냉장 저장고, 작업장, 물류 신선실처럼 공간 특성이 다른 현장에 맞춰 컴팩트·슬림·듀얼·바리오 계열을 선택할 수 있습니다.',
+      '공통 위생 기준과 내식성 설계를 바탕으로 공간 조건과 냉기 분포 방식에 맞는 제품군 선택이 가능합니다.',
     ],
     metrics: [
-      { label: '적용 온도', value: '-30℃ ~ 10℃' },
-      { label: '팬 제어', value: '다단 풍량 조절' },
-      { label: '제상 방식', value: '현장 조건별 설정' },
-      { label: '운영 포인트', value: '온도 편차 최소화' },
+      { label: '적용 공간', value: '저장고·작업장·물류존' },
+      { label: '모델 구성', value: 'GACC / GASC / GADC / GACV' },
+      { label: '공통 기준', value: '위생·내식성·정비성' },
+      { label: '운영 포인트', value: '공간별 맞춤 선택' },
     ],
     gallery: createGallery(
       '구트너 유니트 쿨러',
-      { src: productImage10 },
-      { src: productImage11 },
-      { src: productImage06 },
+      { src: energyImages.guntner.gallery.gacc01, alt: '구트너 유니트 쿨러 갤러리 이미지 1' },
+      { src: energyImages.guntner.gallery.gacc02, alt: '구트너 유니트 쿨러 갤러리 이미지 2' },
+      { src: energyImages.guntner.gallery.gacc03, alt: '구트너 유니트 쿨러 갤러리 이미지 3' },
     ),
+    detailImages: createGallery('구트너 유니트 쿨러 공통 정보', {
+      src: energyImages.guntner.catalogPages.common,
+      alt: '구트너 유니트 쿨러 공통 인증 및 제품군 정보',
+    }),
+    seriesTabs: [
+      {
+        id: 'gacc',
+        label: 'GACC',
+        model: 'Cubic COMPACT Air Cooler',
+        summary:
+          '컴팩트한 본체와 위생 중심 구조를 바탕으로 냉동·냉장 저장고와 워크인 공간에 폭넓게 적용하는 기본형 라인입니다.',
+        detailDescription:
+          '샘플 페이지와 카달로그 기준 GACC는 저장고와 워크인 공간에 맞춘 대표 라인입니다. 컴팩트한 큐빅 디자인, HACCP 대응 구조, 경첩식 트레이와 천장 브라켓 구성을 통해 설치와 유지관리 접근성을 확보하고, 부식 방지 AlMg 케이스와 코일 보호 옵션으로 장기 운영 안정성을 확보합니다.',
+        tags: ['#GACC', '#컴팩트', '#워크인'],
+        highlights: [
+          '중형 냉동·냉장 저장고와 대형마트 워크인 공간에 맞춘 큐빅형 유니트 쿨러입니다.',
+          '식품 안전 재질과 손쉬운 세척 구조를 전제로 하는 HACCP 위생 인증 제품군입니다.',
+          '부식 방지 AlMg 알루미늄 합금 케이스와 분체도장 마감으로 내식성과 유지관리를 함께 확보합니다.',
+          '샘플 기준 냉동·냉장 겸용 모델부터 워크인 냉동·냉장, 소생고 대응 모델까지 폭이 넓습니다.',
+        ],
+        metrics: [
+          { label: '권장 공간', value: '저장고·워크인' },
+          { label: '대표 구조', value: '컴팩트 천장형' },
+          { label: '주요 포인트', value: '컴팩트·위생' },
+        ],
+        gallery: createGallery(
+          '구트너 유니트 쿨러 GACC',
+          { src: energyImages.guntner.gallery.gacc01, alt: '구트너 유니트 쿨러 GACC 이미지 1' },
+          { src: energyImages.guntner.gallery.gacc02, alt: '구트너 유니트 쿨러 GACC 이미지 2' },
+          { src: energyImages.guntner.gallery.gacc03, alt: '구트너 유니트 쿨러 GACC 이미지 3' },
+        ),
+        detailImages: createGallery('구트너 유니트 쿨러 GACC', {
+          src: energyImages.guntner.catalogPages.gacc,
+          alt: '구트너 유니트 쿨러 GACC 카달로그 이미지',
+        }),
+      },
+      {
+        id: 'gasc',
+        label: 'GASC',
+        model: 'Slim COMPACT Air Cooler',
+        summary:
+          '슬림한 평면형 본체와 EC 팬 옵션을 중심으로 작업장과 소분실의 공간 활용을 높이는 공간 절약형 라인입니다.',
+        detailDescription:
+          '카달로그 기준 GASC는 작업장 및 소분실처럼 장비 돌출을 줄여야 하는 공간을 겨냥합니다. 슬림 디자인으로 천장 점유를 최소화하고, 식품 안전 재질과 힌지 구조로 위생 점검성을 확보하며, EC 팬 옵션과 ErP 대응으로 에너지 절감 운영에 유리한 구성을 제공합니다.',
+        tags: ['#GASC', '#슬림형', '#EC팬'],
+        highlights: [
+          '슬림 디자인으로 공간 활용을 극대화해 소형 저온실과 작업장 동선 간섭을 줄입니다.',
+          'HACCP 위생 인증 기반의 식품 안전 재질과 접이식 트레이 구조로 청소와 점검이 쉽습니다.',
+          '카달로그 기준 EC fan 선택 시 최대 60% 수준의 에너지 절감 운전을 기대할 수 있습니다.',
+          '부식 방지 AlMg 알루미늄 합금 케이스와 Coil Defender 계열 옵션으로 내식성을 높일 수 있습니다.',
+        ],
+        metrics: [
+          { label: '권장 공간', value: '작업장·소분실' },
+          { label: '대표 구조', value: '슬림 평면형' },
+          { label: '주요 포인트', value: '슬림·에너지 절감' },
+        ],
+        gallery: createGallery(
+          '구트너 유니트 쿨러 GASC',
+          {
+            src: energyImages.guntner.catalogPages.gasc,
+            alt: '구트너 유니트 쿨러 GASC 카달로그 이미지 1',
+          },
+          {
+            src: energyImages.guntner.catalogPages.common,
+            alt: '구트너 유니트 쿨러 공통 인증 이미지',
+          },
+          {
+            src: energyImages.guntner.catalogPages.gasc,
+            alt: '구트너 유니트 쿨러 GASC 카달로그 이미지 2',
+          },
+        ),
+        detailImages: createGallery('구트너 유니트 쿨러 GASC', {
+          src: energyImages.guntner.catalogPages.gasc,
+          alt: '구트너 유니트 쿨러 GASC 카달로그 이미지',
+        }),
+      },
+      {
+        id: 'gadc',
+        label: 'GADC',
+        model: 'Dual COMPACT Air Cooler',
+        summary:
+          '양방향 균일 토출과 평면형 구성을 바탕으로 대형마트 쿨링존과 물류 신선실처럼 긴 공간에 대응하는 라인입니다.',
+        detailDescription:
+          '카달로그 기준 GADC는 평면형 본체와 양방향 냉기 분포를 핵심으로 합니다. 공기 교환이 잦은 물류·매장 공간에서 부드럽고 균일한 냉기 분포를 제공하고, 제습이 강하지 않아 신선식품 보관에 유리하며, 드레인 파이프를 최소화하는 설치 구성이 특징입니다.',
+        tags: ['#GADC', '#양방향토출', '#신선실'],
+        highlights: [
+          '긴 실내 공간의 중앙에서 양쪽으로 냉기를 분배해 균일한 냉각을 유도합니다.',
+          '대형마트 쿨링존과 물류창고 신선실처럼 출입이 잦은 공간의 온도 편차 대응에 적합합니다.',
+          '제습이 강하지 않아 신선식품 보관 환경에 유리하며 작업 구역의 체감 냉풍을 낮추는 데 유리합니다.',
+          '위생 설계와 부식 방지 케이스, 드레인 배관 부담을 낮춘 설치 구성이 함께 강조됩니다.',
+        ],
+        metrics: [
+          { label: '권장 공간', value: '쿨링존·신선실' },
+          { label: '대표 구조', value: '양방향 평면형' },
+          { label: '주요 포인트', value: '양방향·저제습' },
+        ],
+        gallery: createGallery(
+          '구트너 유니트 쿨러 GADC',
+          {
+            src: energyImages.guntner.catalogPages.gadc,
+            alt: '구트너 유니트 쿨러 GADC 카달로그 이미지 1',
+          },
+          {
+            src: energyImages.guntner.catalogPages.common,
+            alt: '구트너 유니트 쿨러 공통 인증 이미지',
+          },
+          {
+            src: energyImages.guntner.catalogPages.gadc,
+            alt: '구트너 유니트 쿨러 GADC 카달로그 이미지 2',
+          },
+        ),
+        detailImages: createGallery('구트너 유니트 쿨러 GADC', {
+          src: energyImages.guntner.catalogPages.gadc,
+          alt: '구트너 유니트 쿨러 GADC 카달로그 이미지',
+        }),
+      },
+      {
+        id: 'gacv',
+        label: 'GACV',
+        model: 'Cubic VARIO Air Cooler',
+        summary:
+          '폭넓은 케이싱 구성과 팬 조합, 재질 선택을 지원해 현장 조건에 맞춘 맞춤 구성이 가능한 바리오형 라인입니다.',
+        detailDescription:
+          'GACV는 다양한 케이싱 설계와 팬 조합, 재질 선택이 가능한 바리오형 에어쿨러입니다. 힌지형 드립 트레이와 팬 플레이트 구조로 세척과 점검이 쉽고, 전기·핫가스·브라인 제상 방식과 에어 인렛 후드, 다운블로우 덕트, 에어 삭스 연결 같은 부속 옵션을 폭넓게 조합할 수 있어 산업용 냉각 현장의 맞춤 구성이 용이합니다.',
+        tags: ['#GACV', '#VARIO', '#커스터마이즈'],
+        highlights: [
+          '공식 Güntner 기준으로 다양한 케이싱 설계, 팬 콘셉트, 재질 조합을 선택할 수 있는 바리오형 에어쿨러입니다.',
+          '힌지형 드립 트레이와 팬 플레이트 구조로 세척과 육안 점검 접근성을 높였습니다.',
+          '식품 안전 재질, 자연냉매 최적화, AC·EC 팬 선택, 전기·핫가스·브라인 제상 옵션을 폭넓게 제공합니다.',
+          '에어 인렛 후드, 다운블로우 덕트, 에어 삭스 연결 등 현장별 부속 옵션 확장이 넓은 편입니다.',
+        ],
+        metrics: [
+          { label: '권장 공간', value: '맞춤형 산업 냉각' },
+          { label: '대표 구조', value: '바리오 커스터마이즈형' },
+          { label: '주요 포인트', value: '커스터마이즈·위생' },
+        ],
+        gallery: createGallery(
+          '구트너 유니트 쿨러 GACV',
+          {
+            src: energyImages.guntner.catalogPages.common,
+            alt: '구트너 유니트 쿨러 공통 제품군 이미지 1',
+          },
+          {
+            src: energyImages.guntner.catalogPages.common,
+            alt: '구트너 유니트 쿨러 공통 제품군 이미지 2',
+          },
+          {
+            src: energyImages.guntner.catalogPages.common,
+            alt: '구트너 유니트 쿨러 공통 제품군 이미지 3',
+          },
+        ),
+      },
+    ],
     filters: {
       application: ['cold-storage', 'logistics'],
       equipment: ['cooler'],
-      priority: ['energy-saving', 'maintenance'],
+      priority: ['maintenance', 'energy-saving'],
     },
   }),
   createCard('energy-solution', {
     id: 'ahu-refill-filter-modular',
     tabId: 'ahu-refill-filter',
     title: '공조기 리필형 필터',
-    model: 'ES-AF-120',
+    model: '리필형 프리필터 · 미듐필터',
     summary:
-      '교체 시간을 줄이고 폐기 비용을 낮출 수 있도록 리필형 구조로 설계한 공조기 필터 솔루션입니다.',
+      '기존 공조기 프레임을 재사용하고 필터만 간편 교체하는 특허형 구조로 유지관리비와 에너지 비용을 함께 줄이는 공조기 필터 솔루션입니다.',
     detailDescription:
-      '공조기 프레임은 그대로 유지하고 필터 매체만 교체하는 리필형 구조를 채택해, 현장 점검 시간과 소모품 폐기량을 동시에 줄이는 공조기 필터 솔루션입니다.',
+      '기계설비 브로셔 기준 공조기 리필형 필터는 재사용 특허 프레임에 리필형 미듐필터와 프리필터를 결합해 적용하는 구조입니다. 최초 1회 기존 공조기에 프레임을 삽입한 뒤에는 필터만 교체하는 방식으로 운용해 프레임 폐기와 교체 시간을 줄이고, 다중망 필터 적용과 난연 소재 구성을 통해 공기질 확보와 에너지 비용 절감, 유지관리 안전성을 함께 고려합니다.',
     imageSrc: productImage04,
     imageAlt: '공조기 리필형 필터 이미지',
-    tags: ['#공조기', '#리필필터', '#운영비절감'],
+    tags: ['#공조기', '#리필형필터', '#특허제품'],
     highlights: [
-      '기존 프레임을 활용해 필터 매체만 빠르게 교체할 수 있는 구조',
-      '현장별 분진 부하와 운전 시간을 고려한 교체 주기 가이드',
-      '에너지 손실을 줄이기 위한 압력 강하 관리 포인트 제공',
+      '프레임 하나에 두 개 필터를 적용하는 일체형 리필 구조로 최초 설치 후에는 필터만 교환하는 방식입니다.',
+      '기존 공조기에 프레임을 삽입해 재사용하고, 필터만 교체해 프레임은 약 5~10년 재사용하는 운용을 전제로 합니다.',
+      '다중망 필터 구조와 공기 누수 저감 구조로 공조기 에너지 비용 절감과 상용 인증 확보를 함께 강조합니다.',
+      '브로셔 기준 난연 소재 적용, 폐기물 저감, 롯데타워 공급 계약 사례까지 포함된 특허 제품군입니다.',
     ],
     metrics: [
       { label: '적용 설비', value: '공조기·AHU' },
-      { label: '교체 방식', value: '리필형 모듈' },
-      { label: '관리 항목', value: '차압·분진량' },
-      { label: '운영 효과', value: '소모품 비용 절감' },
+      { label: '교체 방식', value: '필터만 교체' },
+      { label: '프레임 운용', value: '약 5~10년 재사용' },
+      { label: '운영 효과', value: '유지관리비·폐기물 절감' },
     ],
     gallery: createGallery(
       '공조기 리필형 필터',
-      { src: productImage04 },
-      { src: productImage05 },
-      { src: heroImage02 },
+      { src: productImage04, alt: '공조기 리필형 필터 대표 이미지' },
+      {
+        src: energyImages.ahuFilter.replacementProcess,
+        alt: '공조기 리필형 필터 교체 전중후 이미지',
+      },
+      {
+        src: energyImages.ahuFilter.comparisonChart,
+        alt: '공조기 리필형 필터 비교표 이미지',
+      },
+    ),
+    detailImages: createGallery(
+      '공조기 리필형 필터',
+      {
+        src: energyImages.ahuFilter.brochurePage,
+        alt: '공조기 리필형 필터 브로셔 상세 이미지',
+      },
+      {
+        src: energyImages.ahuFilter.comparisonChart,
+        alt: '공조기 리필형 필터 비교 자료 이미지',
+      },
     ),
     filters: {
       application: ['retail'],
@@ -342,30 +516,48 @@ const energyCards: CatalogCard[] = [
     id: 'motor-direct-control-system-smart-fan',
     tabId: 'motor-direct-control-system',
     title: '모터 직결제어시스템',
-    model: 'ES-MD-210/320',
+    model: '저전력 직결팬 · Easy Shaft',
     summary:
-      '환기·공조 팬과 냉각수 계통 펌프의 운전 데이터를 기반으로 모터 직결 제어를 수행해 에너지 사용량을 정밀하게 조정합니다.',
+      '벨트와 풀리 구조를 줄인 저전력 직결 기술로 공조 송풍기의 전력 사용량과 유지관리 부담을 함께 낮추는 특허형 직결 제어 솔루션입니다.',
     detailDescription:
-      '팬 부하 변화, 실내 조건, 냉각수 계통 압력을 함께 판단해 직결 제어를 수행하는 시스템입니다. 환기·공조 팬과 브라인·냉각수 펌프 모두에 적용할 수 있도록 구성해, 현장의 운영 패턴에 따라 속도 제어와 경보 기준을 세밀하게 조정할 수 있습니다.',
+      '기계설비 브로셔 기준 저전력 직결팬은 벨트와 체인, 구리스 주입 요소를 줄인 일체형 직결 구조를 통해 30~40% 전력 절감 효과를 제안합니다. 무벨트 운용으로 유지보수가 쉬워지고 관리자의 안전사고 예방에 유리하며, 고효율 모터와 인버터 설치 시 관련 지원금 대상까지 고려하는 구성을 특징으로 합니다. 리뉴얼 가이드 18페이지의 제안 자료는 Easy Shaft 구조와 에너지 절감, 유지보수 비용 감소, 안전사고 예방 관점의 보조 설명 자료로 함께 활용할 수 있습니다.',
     imageSrc: productImage01,
     imageAlt: '모터 직결제어시스템 이미지',
-    tags: ['#직결제어', '#운전최적화', '#전력절감'],
+    tags: ['#직결제어', '#저전력직결팬', '#전력절감'],
     highlights: [
-      '팬 효율 곡선과 펌프 압력 변화를 함께 고려한 운전 포인트 자동 추천',
-      '현장 알람과 제어 이력을 한 화면에서 관리하는 통합 대시보드 구성',
-      '설비 점검 이력과 연동 가능한 유지보수 기록 체계',
+      '특허 기반 저전력 직결 기술로 안전성을 확보하면서 약 30~40% 수준의 전력 절감 효과를 제안합니다.',
+      '벨트, 체인, 구리스 주입 요소를 줄여 유지보수 관리가 쉬워지고 유지관리비 절감에 유리합니다.',
+      '무벨트 구조로 관리자의 유지보수 편의와 작업 안전성을 함께 높이는 방향으로 설계되었습니다.',
+      '브로셔 기준 고효율 모터 및 인버터 설치 시 관련 지원금 대상까지 고려하는 제품군입니다.',
     ],
     metrics: [
-      { label: '제어 대상', value: '환기·공조 팬·냉각수 펌프' },
-      { label: '연동 방식', value: '현장 데이터 기반' },
-      { label: '운전 기준', value: '실부하 추종 제어' },
-      { label: '운영 효과', value: '부하별 속도 최적화' },
+      { label: '적용 설비', value: '공조 송풍기·냉각탑 팬' },
+      { label: '구동 방식', value: '직결형 일체 구조' },
+      { label: '전력 효과', value: '약 30~40% 절감' },
+      { label: '운영 포인트', value: '유지관리·안전성 개선' },
     ],
     gallery: createGallery(
       '모터 직결제어시스템',
-      { src: productImage01 },
-      { src: productImage02 },
-      { src: productImage04 },
+      { src: productImage01, alt: '모터 직결제어시스템 대표 이미지' },
+      {
+        src: energyImages.motorDirectControl.easyShaftComparison,
+        alt: '모터 직결제어시스템 Easy Shaft 비교 이미지',
+      },
+      {
+        src: energyImages.motorDirectControl.valuePropositionPanels,
+        alt: '모터 직결제어시스템 가치 제안 이미지',
+      },
+    ),
+    detailImages: createGallery(
+      '모터 직결제어시스템',
+      {
+        src: energyImages.motorDirectControl.brochurePage,
+        alt: '모터 직결제어시스템 브로셔 상세 이미지',
+      },
+      {
+        src: energyImages.motorDirectControl.guidePage,
+        alt: '모터 직결제어시스템 가이드 참고 이미지',
+      },
     ),
     filters: {
       application: ['retail', 'logistics', 'cold-storage'],
@@ -377,30 +569,46 @@ const energyCards: CatalogCard[] = [
     id: 'open-showcase-door-retrofit',
     tabId: 'open-showcase-door',
     title: '오픈 쇼케이스 도어',
-    model: 'ES-OD-118',
+    model: 'Sliding Door · Swing Door',
     summary:
-      '오픈 쇼케이스에 도어를 적용해 냉기 손실을 줄이고 매장 동선에 맞는 개폐감을 유지하는 솔루션입니다.',
+      '오픈다단 쇼케이스에 Sliding 또는 Swing 도어를 적용해 냉기 손실을 줄이고 전기료 절감, 정부지원금 활용, 투자비 회수까지 함께 검토하는 리테일 개선 솔루션입니다.',
     detailDescription:
-      '매장 동선을 해치지 않는 개폐 각도와 도어 프레임 구조를 적용해 기존 오픈 쇼케이스를 효율적으로 개선합니다. 냉기 손실과 결로 이슈를 함께 관리할 수 있도록 설계했습니다.',
+      '리뉴얼 가이드 19페이지 기준 오픈 쇼케이스 도어는 기존 문달기 제안의 특장점과 시공 사례를 유지하면서 Sliding Door와 Swing Door 두 타입으로 정리하는 방향입니다. 카달로그 기준 Sliding Door는 2m 미만의 좁은 동선에 적합하고 Swing Door 대비 약 15% 저렴하며, 약 40% 전기료 절감과 60% 수준의 정부지원금 혜택으로 9개월 내 투자비 회수를 제안합니다. Swing Door는 넓은 동선과 고습 환경에 적합하고 결로방지히터 적용으로 상품 시인성을 높이며, 약 40% 전기료 절감과 50% 수준의 정부지원금 혜택으로 13개월 내 투자비 회수를 제안합니다.',
     imageSrc: productImage03,
     imageAlt: '오픈 쇼케이스 도어 이미지',
-    tags: ['#쇼케이스도어', '#냉기손실저감', '#리테일개선'],
+    tags: ['#쇼케이스도어', '#리테일개선', '#전기료절감'],
     highlights: [
-      '기존 오픈 쇼케이스에 맞춘 리트로핏 프레임 구성',
-      '개폐 빈도와 결로 관리를 고려한 도어 하드웨어 사양',
-      '매장 운영 동선을 유지하는 사용자 경험 중심 설계',
+      'Sliding Door는 좁은 동선에 적합하고 Swing Door 대비 약 15% 저렴한 구성이 특징입니다.',
+      'Swing Door는 넓은 동선과 고습 환경에 적합하며 결로방지히터 적용으로 상품 시인성을 높입니다.',
+      '두 타입 모두 카달로그 기준 약 40% 전기료 절감 효과와 한전 지원 기준 충족을 전제로 구성됩니다.',
+      '리뉴얼 가이드 기준 시공 공정 안내와 실제 설치 사례를 함께 활용하는 업데이트형 상세 페이지 구성 대상입니다.',
     ],
     metrics: [
       { label: '적용 대상', value: '오픈 쇼케이스' },
-      { label: '설치 방식', value: '리트로핏 시공' },
-      { label: '운영 효과', value: '냉기 손실 저감' },
-      { label: '점검 항목', value: '결로·개폐감' },
+      { label: '도어 타입', value: 'Sliding · Swing' },
+      { label: '운영 효과', value: '전기료 약 40% 절감' },
+      { label: '도입 포인트', value: '지원금·투자비 회수' },
     ],
     gallery: createGallery(
       '오픈 쇼케이스 도어',
       { src: productImage03 },
       { src: productImage07 },
       { src: productImage08 },
+    ),
+    detailImages: createGallery(
+      '오픈 쇼케이스 도어',
+      {
+        src: energyImages.openShowcaseDoor.catalogPage71,
+        alt: '오픈 쇼케이스 도어 슬라이딩 도어 카달로그 이미지',
+      },
+      {
+        src: energyImages.openShowcaseDoor.catalogPage72,
+        alt: '오픈 쇼케이스 도어 스윙 도어 카달로그 이미지',
+      },
+      {
+        src: energyImages.openShowcaseDoor.guidePage19,
+        alt: '오픈 쇼케이스 도어 리뉴얼 가이드 이미지',
+      },
     ),
     filters: {
       application: ['retail'],

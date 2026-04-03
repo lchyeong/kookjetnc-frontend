@@ -18,18 +18,8 @@ import type {
 import { routePaths } from '@/routes/routeRegistry';
 
 const HISTORY_SNAPSHOT_BASE = '/reference/haatz-history/2026-03-31';
-const HISTORY_MENU_PLACEHOLDER_HREF = '#';
-
 const historyAsset = (path: string) => {
   return `${HISTORY_SNAPSHOT_BASE}${path}`;
-};
-
-const createHistoryPlaceholderLink = (label: string): HistorySubNavLink => {
-  return {
-    href: HISTORY_MENU_PLACEHOLDER_HREF,
-    isPlaceholder: true,
-    label,
-  };
 };
 
 const createHistoryInternalLink = (to: string, label: string): HistorySubNavLink => {
@@ -69,11 +59,11 @@ export const historyHeroContent: HistoryHeroContent = {
 export const historyTimelineBackgroundSrc = historyAsset('/background/history1-bg.jpg');
 
 export const historySecondarySubNavLinks: HistorySubNavLink[] = [
-  createHistoryPlaceholderLink('CEO인사말'),
+  createHistoryInternalLink(routePaths.aboutGreeting, 'CEO인사말'),
   createHistoryInternalLink(routePaths.aboutHistory, '경영이념·연혁'),
   createHistoryInternalLink(routePaths.aboutCertification, '인증·특허'),
   createHistoryInternalLink(routePaths.aboutOrganization, '조직도'),
-  createHistoryPlaceholderLink('사업장 위치'),
+  createHistoryInternalLink(routePaths.aboutLocation, '사업장 위치'),
 ];
 
 export const historyDecadeMarkers: HistoryDecadeMarker[] = [

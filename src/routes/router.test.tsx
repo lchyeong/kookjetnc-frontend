@@ -73,6 +73,20 @@ describe('router', () => {
     expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
   });
 
+  it('renders the internal about greeting route', () => {
+    renderRoute('/about/greeting');
+
+    expect(
+      screen.getByRole('heading', {
+        name: /365일 신속한 대응과 끊임없는 신기술 연구를 통해[\s\S]*고객의 가치를 창출하고자 노력하고 있습니다\./u,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('about-greeting-message-section')).toBeInTheDocument();
+    expect(screen.getByAltText('(주)국제티엔씨 대표이사')).toBeInTheDocument();
+    expect(document.querySelector('main')).toHaveClass(styles['main'], styles['mainFullBleed']);
+    expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
+  });
+
   it('renders the internal about certification route', () => {
     renderRoute('/about/certification');
 
@@ -98,6 +112,22 @@ describe('router', () => {
     ).toBeInTheDocument();
     expect(screen.getByTestId('about-organization-group-mechanical-equipment')).toBeInTheDocument();
     expect(screen.getByTestId('about-organization-capability-partners')).toBeInTheDocument();
+    expect(document.querySelector('main')).toHaveClass(styles['main'], styles['mainFullBleed']);
+    expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
+  });
+
+  it('renders the internal about location route', () => {
+    renderRoute('/about/location');
+
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: '사업장 위치 안내',
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('about-location-map-frame')).toBeInTheDocument();
+    expect(screen.getByTestId('about-location-info-subway')).toBeInTheDocument();
+    expect(screen.getByTestId('about-location-info-bus')).toBeInTheDocument();
     expect(document.querySelector('main')).toHaveClass(styles['main'], styles['mainFullBleed']);
     expect(document.querySelector('main')).not.toHaveClass(styles['mainClipX'], styles['mainHome']);
   });

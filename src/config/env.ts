@@ -11,11 +11,13 @@ const envSchema = z.object({
   VITE_API_URL: z.url().optional(),
   VITE_API_BASE_URL: z.url().optional(),
   VITE_ENABLE_MOCK: booleanString,
+  VITE_KAKAO_MAP_API_KEY: z.string().trim().min(1).optional(),
 });
 
 export type AppEnv = z.infer<typeof envSchema> & {
   apiBaseUrl: string | null;
   appName: string;
+  kakaoMapApiKey: string | null;
 };
 
 const toZodErrorMessage = (error: z.ZodError): string => {
@@ -33,6 +35,7 @@ export const env: AppEnv = (() => {
 
   const apiBaseUrl = parsed.data.VITE_API_URL ?? parsed.data.VITE_API_BASE_URL ?? null;
   const appName = parsed.data.VITE_APP_NAME ?? 'Agency Starter';
+  const kakaoMapApiKey = parsed.data.VITE_KAKAO_MAP_API_KEY ?? null;
 
-  return { ...parsed.data, apiBaseUrl, appName };
+  return { ...parsed.data, apiBaseUrl, appName, kakaoMapApiKey };
 })();

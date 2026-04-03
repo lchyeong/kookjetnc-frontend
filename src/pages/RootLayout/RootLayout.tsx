@@ -20,13 +20,20 @@ import {
 const RootLayout = () => {
   const location = useLocation();
   const navigationType = useNavigationType();
+  const isAboutGreetingRoute = location.pathname === routePaths.aboutGreeting;
   const isAboutHistoryRoute = location.pathname === routePaths.aboutHistory;
   const isAboutCertificationRoute = location.pathname === routePaths.aboutCertification;
   const isAboutOrganizationRoute = location.pathname === routePaths.aboutOrganization;
+  const isAboutLocationRoute = location.pathname === routePaths.aboutLocation;
   const isHomeRoute = location.pathname === routePaths.home;
   const isCatalogPageRoute = isCatalogRoute(location.pathname);
   const isFullBleedRoute =
-    isHomeRoute || isAboutHistoryRoute || isAboutCertificationRoute || isAboutOrganizationRoute;
+    isHomeRoute ||
+    isAboutGreetingRoute ||
+    isAboutHistoryRoute ||
+    isAboutCertificationRoute ||
+    isAboutOrganizationRoute ||
+    isAboutLocationRoute;
   const shouldClipMainX = isHomeRoute;
   const shouldShowQuickMenu = isHomeRoute || isCatalogPageRoute;
   const introPhase = useHaatzHomeUiStore((state) => state.introPhase);

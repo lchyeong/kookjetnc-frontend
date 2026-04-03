@@ -108,17 +108,15 @@ const createCatalogMenuLinks = (categorySlug: CatalogCategorySlug) => {
     });
 };
 
-const companyPlaceholderLinks = createPlaceholderLinks([
-  'CEO인사말',
-  '인증·특허',
-  '조직도',
-  '사업장 위치',
-]);
 const energySolutionLinks = createCatalogMenuLinks('energy-solution');
 const mechanicalHvacLinks = createCatalogMenuLinks('mechanical-hvac');
 const refrigerationSystemLinks = createCatalogMenuLinks('refrigeration-system');
 const companyLinksWithHistoryRoute = [
-  companyPlaceholderLinks[0],
+  {
+    href: routePaths.aboutGreeting,
+    label: 'CEO인사말',
+    to: routePaths.aboutGreeting,
+  },
   {
     href: routePaths.aboutHistory,
     label: '경영이념·연혁',
@@ -134,7 +132,11 @@ const companyLinksWithHistoryRoute = [
     label: '조직도',
     to: routePaths.aboutOrganization,
   },
-  companyPlaceholderLinks[3],
+  {
+    href: routePaths.aboutLocation,
+    label: '사업장 위치',
+    to: routePaths.aboutLocation,
+  },
 ];
 
 export const headerMenuGroups: HeaderMenuGroup[] = [

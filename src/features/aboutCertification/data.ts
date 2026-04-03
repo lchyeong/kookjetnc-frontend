@@ -8,19 +8,10 @@ import type {
 } from '@/features/aboutCertification/types';
 import { routePaths } from '@/routes/routeRegistry';
 
-const CERTIFICATION_MENU_PLACEHOLDER_HREF = '#';
 const ABOUT_SECTION_SNAPSHOT_BASE = '/reference/haatz-history/2026-03-31';
 
 const aboutSectionAsset = (path: string) => {
   return `${ABOUT_SECTION_SNAPSHOT_BASE}${path}`;
-};
-
-const createCertificationPlaceholderLink = (label: string): CertificationSubNavLink => {
-  return {
-    href: CERTIFICATION_MENU_PLACEHOLDER_HREF,
-    isPlaceholder: true,
-    label,
-  };
 };
 
 const createCertificationInternalLink = (to: string, label: string): CertificationSubNavLink => {
@@ -63,11 +54,11 @@ export const certificationHeroContent: CertificationHeroContent = {
 export const certificationArchiveBackgroundSrc = aboutSectionAsset('/background/history1-bg.jpg');
 
 export const certificationSecondarySubNavLinks: CertificationSubNavLink[] = [
-  createCertificationPlaceholderLink('CEO인사말'),
+  createCertificationInternalLink(routePaths.aboutGreeting, 'CEO인사말'),
   createCertificationInternalLink(routePaths.aboutHistory, '경영이념·연혁'),
   createCertificationInternalLink(routePaths.aboutCertification, '인증·특허'),
   createCertificationInternalLink(routePaths.aboutOrganization, '조직도'),
-  createCertificationPlaceholderLink('사업장 위치'),
+  createCertificationInternalLink(routePaths.aboutLocation, '사업장 위치'),
 ];
 
 export const certificationCategoryMarkers: CertificationCategoryMarker[] = [

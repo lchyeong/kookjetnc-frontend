@@ -35,6 +35,19 @@ export interface CatalogMetric {
   value: string;
 }
 
+export interface CatalogSeriesTab {
+  detailDescription: string;
+  detailImages?: CatalogGalleryImage[];
+  gallery?: CatalogGalleryImage[];
+  highlights: string[];
+  id: string;
+  label: string;
+  metrics?: CatalogMetric[];
+  model: string;
+  summary: string;
+  tags: string[];
+}
+
 export interface CatalogCard {
   categoryId: CatalogCategorySlug;
   detailDescription: string;
@@ -47,6 +60,7 @@ export interface CatalogCard {
   imageSrc: string;
   metrics: CatalogMetric[];
   model: string;
+  seriesTabs?: CatalogSeriesTab[];
   slug: string;
   summary: string;
   tabId: string;

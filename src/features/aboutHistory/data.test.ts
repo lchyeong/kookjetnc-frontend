@@ -67,9 +67,9 @@ describe('about history data', () => {
       '사업장 위치',
     ]);
     expect(historySecondarySubNavLinks[0]).toMatchObject({
-      href: '#',
-      isPlaceholder: true,
+      href: '/about/greeting',
       label: 'CEO인사말',
+      to: '/about/greeting',
     });
     expect(historySecondarySubNavLinks[1]).toMatchObject({
       href: '/about/history',
@@ -85,6 +85,11 @@ describe('about history data', () => {
       href: '/about/organization',
       label: '조직도',
       to: '/about/organization',
+    });
+    expect(historySecondarySubNavLinks[4]).toMatchObject({
+      href: '/about/location',
+      label: '사업장 위치',
+      to: '/about/location',
     });
   });
 });

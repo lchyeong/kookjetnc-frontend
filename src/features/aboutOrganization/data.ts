@@ -8,19 +8,10 @@ import type {
   OrganizationSubNavLink,
 } from './types';
 
-const ORGANIZATION_MENU_PLACEHOLDER_HREF = '#';
 const ABOUT_SECTION_SNAPSHOT_BASE = '/reference/haatz-history/2026-03-31';
 
 const aboutSectionAsset = (path: string) => {
   return `${ABOUT_SECTION_SNAPSHOT_BASE}${path}`;
-};
-
-const createOrganizationPlaceholderLink = (label: string): OrganizationSubNavLink => {
-  return {
-    href: ORGANIZATION_MENU_PLACEHOLDER_HREF,
-    isPlaceholder: true,
-    label,
-  };
 };
 
 const createOrganizationInternalLink = (to: string, label: string): OrganizationSubNavLink => {
@@ -42,11 +33,11 @@ export const organizationHeroContent: OrganizationHeroContent = {
 export const organizationOverviewBackgroundSrc = aboutSectionAsset('/background/history1-bg.jpg');
 
 export const organizationSecondarySubNavLinks: OrganizationSubNavLink[] = [
-  createOrganizationPlaceholderLink('CEO인사말'),
+  createOrganizationInternalLink(routePaths.aboutGreeting, 'CEO인사말'),
   createOrganizationInternalLink(routePaths.aboutHistory, '경영이념·연혁'),
   createOrganizationInternalLink(routePaths.aboutCertification, '인증·특허'),
   createOrganizationInternalLink(routePaths.aboutOrganization, '조직도'),
-  createOrganizationPlaceholderLink('사업장 위치'),
+  createOrganizationInternalLink(routePaths.aboutLocation, '사업장 위치'),
 ];
 
 export const organizationGroups: OrganizationGroup[] = [

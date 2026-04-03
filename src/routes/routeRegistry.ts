@@ -15,9 +15,11 @@ const stringifyRouteParam = (value: number | string) => {
 };
 
 export const routePaths = {
+  aboutGreeting: '/about/greeting',
   aboutHistory: '/about/history',
   aboutCertification: '/about/certification',
   aboutOrganization: '/about/organization',
+  aboutLocation: '/about/location',
   home: '/',
   energySolution: createCatalogCategoryPath('energy-solution'),
   mechanicalHvac: createCatalogCategoryPath('mechanical-hvac'),

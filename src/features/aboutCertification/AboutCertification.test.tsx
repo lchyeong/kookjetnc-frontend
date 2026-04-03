@@ -209,7 +209,7 @@ describe('AboutCertification', () => {
     ).toBeInTheDocument();
   });
 
-  it('closes the secondary drawer on placeholder click, outside click, and Escape', () => {
+  it('closes the secondary drawer on ceo route click, outside click, and Escape', () => {
     render(
       <MemoryRouter initialEntries={['/about/certification']}>
         <AboutCertification />
@@ -220,11 +220,10 @@ describe('AboutCertification', () => {
 
     fireEvent.click(secondaryButton);
 
-    const placeholderItem = screen.getByRole('menuitem', { name: 'CEO인사말' });
+    const greetingItem = screen.getByRole('menuitem', { name: 'CEO인사말' });
 
-    expect(window.location.hash).toBe('');
-    fireEvent.click(placeholderItem);
-    expect(window.location.hash).toBe('');
+    expect(greetingItem).toHaveAttribute('href', '/about/greeting');
+    fireEvent.click(greetingItem);
     expect(
       screen.queryByTestId('about-certification-subnav-drawer-secondary'),
     ).not.toBeInTheDocument();

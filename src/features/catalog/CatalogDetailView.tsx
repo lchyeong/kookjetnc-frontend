@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
-import type { CatalogCard, CatalogCategory } from '@/features/catalog/types';
+import type { CatalogCard, CatalogCategory, CatalogSeriesTab } from '@/features/catalog/types';
 import { routePaths } from '@/routes/routeRegistry';
 import { useToastStore } from '@/stores/useToastStore';
 import { classNames } from '@/utils/classNames';
@@ -78,10 +78,75 @@ interface CatalogDetailViewProps {
   category: CatalogCategory;
 }
 
+interface DetailStoryProps {
+  item: Pick<CatalogCard, 'detailDescription' | 'detailImages'> | CatalogSeriesTab;
+  leadImage?: {
+    alt: string;
+    src: string;
+  };
+  storyTitle: string;
+  storyEyebrow: string;
+}
+
+const DetailStory = ({ item, leadImage, storyEyebrow, storyTitle }: DetailStoryProps) => {
+  const hasDetailImages = (item.detailImages?.length ?? 0) > 0;
+
+  return (
+    <article
+      className={classNames(
+        styles['storyCard'],
+        hasDetailImages && styles['storyCardSequence'],
+        !hasDetailImages && !leadImage && styles['storyCardTextOnly'],
+      )}
+    >
+      {hasDetailImages ? (
+        <div className={styles['detailImageSequence']}>
+          {item.detailImages?.map((image, index) => {
+            return (
+              <figure
+                className={styles['detailImageFigure']}
+                key={`${storyTitle}-${String(index)}-${image.src}`}
+              >
+                <img
+                  alt={image.alt}
+                  className={styles['detailImage']}
+                  loading='lazy'
+                  src={image.src}
+                />
+              </figure>
+            );
+          })}
+        </div>
+      ) : (
+        <>
+          {leadImage ? (
+            <div className={styles['storyMedia']}>
+              <img alt={leadImage.alt} src={leadImage.src} />
+            </div>
+          ) : null}
+          <div className={styles['storyBody']}>
+            <p className={styles['storyEyebrow']}>{storyEyebrow}</p>
+            <h3 className={styles['storyTitle']}>{storyTitle}</h3>
+            <p className={styles['storyText']}>{item.detailDescription}</p>
+          </div>
+        </>
+      )}
+    </article>
+  );
+};
+
 const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
   const showToast = useToastStore((state) => state.showToast);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
-  const hasDetailImages = (card.detailImages?.length ?? 0) > 0;
+  const seriesTabs = card.seriesTabs ?? [];
+  const hasSeriesTabs = seriesTabs.length > 0;
+  const selectedSeriesId = searchParams.get('series');
+  const activeSeries = hasSeriesTabs
+    ? (seriesTabs.find((series) => series.id === selectedSeriesId) ?? seriesTabs[0])
+    : undefined;
+  const detailSource = activeSeries ?? card;
+  const galleryImages = activeSeries?.gallery ?? card.gallery;
 
   const handleShare = async () => {
     try {
@@ -100,15 +165,32 @@ const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
 
   const handleGalleryStep = (direction: 'prev' | 'next') => {
     setActiveGalleryIndex((current) => {
-      if (direction === 'prev') {
-        return current === 0 ? card.gallery.length - 1 : current - 1;
+      if (galleryImages.length === 0) {
+        return 0;
       }
 
-      return current === card.gallery.length - 1 ? 0 : current + 1;
+      if (direction === 'prev') {
+        return current === 0 ? galleryImages.length - 1 : current - 1;
+      }
+
+      return current === galleryImages.length - 1 ? 0 : current + 1;
     });
   };
 
-  const activeGalleryImage = card.gallery[activeGalleryIndex] ?? card.gallery[0];
+  const handleSeriesChange = (seriesId: string) => {
+    const nextSearchParams = new URLSearchParams(searchParams);
+
+    if (seriesId === seriesTabs[0]?.id) {
+      nextSearchParams.delete('series');
+    } else {
+      nextSearchParams.set('series', seriesId);
+    }
+
+    setActiveGalleryIndex(0);
+    setSearchParams(nextSearchParams, { replace: true });
+  };
+
+  const activeGalleryImage = galleryImages[activeGalleryIndex] ?? galleryImages[0];
 
   return (
     <div className={styles['page']}>
@@ -129,7 +211,7 @@ const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
                 </button>
 
                 <div className={styles['thumbList']}>
-                  {card.gallery.map((image, index) => {
+                  {galleryImages.map((image, index) => {
                     const isActive = index === activeGalleryIndex;
 
                     return (
@@ -139,7 +221,7 @@ const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
                           styles['thumbItem'],
                           isActive && styles['thumbItemActive'],
                         )}
-                        key={`${card.id}-thumb-${String(index)}-${image.src}`}
+                        key={`${detailSource.id}-thumb-${String(index)}-${image.src}`}
                         onClick={() => {
                           setActiveGalleryIndex(index);
                         }}
@@ -187,13 +269,53 @@ const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
                     <ShareIcon />
                   </button>
                 </div>
-                <p className={styles['model']}>{card.model}</p>
+                <p className={styles['model']}>
+                  {activeSeries ? `${activeSeries.label} · ${activeSeries.model}` : card.model}
+                </p>
               </div>
 
-              <p className={styles['summary']}>{card.summary}</p>
+              <p className={styles['summary']}>{detailSource.summary}</p>
+
+              {activeSeries ? (
+                <div className={styles['seriesNav']}>
+                  <div className={styles['seriesNavHeader']}>
+                    <p className={styles['seriesNavEyebrow']}>모델 선택</p>
+                    <p className={styles['seriesNavCaption']}>
+                      공통 제품군 정보는 아래에서 함께 확인할 수 있습니다.
+                    </p>
+                  </div>
+                  <div
+                    className={styles['seriesTabList']}
+                    role='tablist'
+                    aria-label='구트너 모델 선택'
+                  >
+                    {seriesTabs.map((series) => {
+                      const isActive = series.id === activeSeries.id;
+
+                      return (
+                        <button
+                          aria-selected={isActive}
+                          className={classNames(
+                            styles['seriesTabButton'],
+                            isActive && styles['seriesTabButtonActive'],
+                          )}
+                          key={series.id}
+                          onClick={() => {
+                            handleSeriesChange(series.id);
+                          }}
+                          role='tab'
+                          type='button'
+                        >
+                          {series.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
 
               <ul className={styles['tagList']}>
-                {card.tags.map((tag) => {
+                {detailSource.tags.map((tag) => {
                   return (
                     <li className={styles['tagItem']} key={tag}>
                       {tag}
@@ -204,12 +326,16 @@ const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
 
               <div className={styles['infoPanel']}>
                 <div className={styles['infoPanelHeader']}>
-                  <p className={styles['infoPanelEyebrow']}>{category.label}</p>
-                  <h2 className={styles['infoPanelTitle']}>제품 특징</h2>
+                  <p className={styles['infoPanelEyebrow']}>
+                    {activeSeries ? '선택 모델 핵심' : category.label}
+                  </p>
+                  <h2 className={styles['infoPanelTitle']}>
+                    {activeSeries ? activeSeries.label : '제품 특징'}
+                  </h2>
                 </div>
 
                 <ul className={styles['highlightList']}>
-                  {card.highlights.map((item) => {
+                  {detailSource.highlights.map((item) => {
                     return (
                       <li className={styles['highlightItem']} key={item}>
                         {item}
@@ -227,65 +353,88 @@ const CatalogDetailView = ({ card, category }: CatalogDetailViewProps) => {
             <div className={styles['editorWrap']}>
               <h2 className={styles['sectionTitle']}>제품 상세정보</h2>
 
-              <div className={styles['editorSection']}>
-                <article
-                  className={classNames(
-                    styles['storyCard'],
-                    hasDetailImages && styles['storyCardSequence'],
-                  )}
-                >
-                  {hasDetailImages ? (
-                    <div className={styles['detailImageSequence']}>
-                      {card.detailImages?.map((image, index) => {
+              {activeSeries ? (
+                <div className={styles['editorSection']}>
+                  <section className={styles['detailBlock']}>
+                    <div className={styles['detailBlockHeader']}>
+                      <p className={styles['galleryPanelEyebrow']}>제품군 공통 정보</p>
+                      <h3 className={styles['galleryPanelTitle']}>Güntner Air Cooler 기준</h3>
+                    </div>
+                    <DetailStory
+                      item={card}
+                      leadImage={card.gallery[0]}
+                      storyEyebrow={card.model}
+                      storyTitle={`${card.title} 제품군 개요`}
+                    />
+                  </section>
+
+                  <section className={styles['detailBlock']}>
+                    <div className={styles['detailBlockHeader']}>
+                      <p className={styles['galleryPanelEyebrow']}>모델 상세 정보</p>
+                      <h3 className={styles['galleryPanelTitle']}>
+                        {`${activeSeries.label} 상세 안내`}
+                      </h3>
+                    </div>
+                    <DetailStory
+                      item={activeSeries}
+                      leadImage={activeSeries.gallery?.[0] ?? card.gallery[0]}
+                      storyEyebrow={activeSeries.model}
+                      storyTitle={`${activeSeries.label} 운영 포인트`}
+                    />
+                  </section>
+
+                  <article className={styles['galleryPanel']}>
+                    <div className={styles['galleryPanelHeader']}>
+                      <p className={styles['galleryPanelEyebrow']}>주요 구성 이미지</p>
+                      <h3 className={styles['galleryPanelTitle']}>
+                        {`${card.title} ${activeSeries.label} 갤러리`}
+                      </h3>
+                    </div>
+                    <div className={styles['galleryGrid']}>
+                      {galleryImages.map((image, index) => {
                         return (
                           <figure
-                            className={styles['detailImageFigure']}
-                            key={`${card.id}-detail-${String(index)}-${image.src}`}
+                            className={styles['galleryFigure']}
+                            key={`${activeSeries.id}-${String(index)}-${image.src}`}
                           >
-                            <img
-                              alt={image.alt}
-                              className={styles['detailImage']}
-                              loading='lazy'
-                              src={image.src}
-                            />
+                            <img alt={image.alt} src={image.src} />
+                            <figcaption>{image.alt}</figcaption>
                           </figure>
                         );
                       })}
                     </div>
-                  ) : (
-                    <>
-                      <div className={styles['storyMedia']}>
-                        <img alt={card.gallery[0]?.alt} src={card.gallery[0]?.src} />
-                      </div>
-                      <div className={styles['storyBody']}>
-                        <p className={styles['storyEyebrow']}>{card.model}</p>
-                        <h3 className={styles['storyTitle']}>{`${card.title} 운영 제안`}</h3>
-                        <p className={styles['storyText']}>{card.detailDescription}</p>
-                      </div>
-                    </>
-                  )}
-                </article>
+                  </article>
+                </div>
+              ) : (
+                <div className={styles['editorSection']}>
+                  <DetailStory
+                    item={card}
+                    leadImage={card.gallery[0]}
+                    storyEyebrow={card.model}
+                    storyTitle={`${card.title} 운영 제안`}
+                  />
 
-                <article className={styles['galleryPanel']}>
-                  <div className={styles['galleryPanelHeader']}>
-                    <p className={styles['galleryPanelEyebrow']}>주요 구성 이미지</p>
-                    <h3 className={styles['galleryPanelTitle']}>{`${card.title} 갤러리`}</h3>
-                  </div>
-                  <div className={styles['galleryGrid']}>
-                    {card.gallery.map((image, index) => {
-                      return (
-                        <figure
-                          className={styles['galleryFigure']}
-                          key={`${card.id}-${String(index)}-${image.src}`}
-                        >
-                          <img alt={image.alt} src={image.src} />
-                          <figcaption>{image.alt}</figcaption>
-                        </figure>
-                      );
-                    })}
-                  </div>
-                </article>
-              </div>
+                  <article className={styles['galleryPanel']}>
+                    <div className={styles['galleryPanelHeader']}>
+                      <p className={styles['galleryPanelEyebrow']}>주요 구성 이미지</p>
+                      <h3 className={styles['galleryPanelTitle']}>{`${card.title} 갤러리`}</h3>
+                    </div>
+                    <div className={styles['galleryGrid']}>
+                      {card.gallery.map((image, index) => {
+                        return (
+                          <figure
+                            className={styles['galleryFigure']}
+                            key={`${card.id}-${String(index)}-${image.src}`}
+                          >
+                            <img alt={image.alt} src={image.src} />
+                            <figcaption>{image.alt}</figcaption>
+                          </figure>
+                        );
+                      })}
+                    </div>
+                  </article>
+                </div>
+              )}
             </div>
 
             <div className={styles['backLinkWrap']}>
