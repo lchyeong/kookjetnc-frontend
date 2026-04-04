@@ -78,9 +78,9 @@ interface BackendAdminWebCatalogSummary {
 interface MockWebCatalog extends WebCatalogDetail {}
 
 const shouldUseBoardMocks = import.meta.env.VITE_ENABLE_MOCK === 'true';
-const companyCatalogPdfUrl = encodeURI('/국제티엔씨 카달로그 V2 25.08.05.pdf');
-const mechanicalBrochurePdfUrl = encodeURI('/최종본_기계설비브로셔_전체_작은파일.pdf');
-const renewalGuidePdfUrl = encodeURI('/홈페이지 리뉴얼 가이드_260202.pdf');
+const companyCatalogPdfUrl = encodeURI('/kookje-tnc-catalog-v2-25-08-05.pdf');
+const mechanicalBrochurePdfUrl = encodeURI('/mechanical-facilities-brochure.pdf');
+const renewalGuidePdfUrl = encodeURI('/website-renewal-guide-260202.pdf');
 const defaultCoverImageUrl = mechanicalHvacImages.overview.guidePage21;
 
 const createPreviewPages = (pageNumbers: number[], imageUrls: string[]): WebCatalogPreviewPage[] => {
@@ -97,7 +97,7 @@ let mockWebCatalogs: MockWebCatalog[] = [
     title: '회사 종합 카탈로그',
     description: '회사 소개, 사업 영역, 엔지니어링 역량을 잡지처럼 훑어볼 수 있는 종합 카탈로그입니다.',
     category: '회사소개',
-    fileName: '국제티엔씨 카달로그 V2 25.08.05.pdf',
+    fileName: 'kookje-tnc-catalog-v2-25-08-05.pdf',
     fileUrl: companyCatalogPdfUrl,
     pageCount: 36,
     coverImageUrl: mechanicalHvacImages.overview.brochurePage09BusinessArea,
@@ -121,7 +121,7 @@ let mockWebCatalogs: MockWebCatalog[] = [
     title: '기계설비 브로슈어',
     description: '난방·냉방, 공조, 위생배관, 자동제어 등 주요 기계설비 라인업을 정리한 브로슈어입니다.',
     category: '브로슈어',
-    fileName: '최종본_기계설비브로셔_전체_작은파일.pdf',
+    fileName: 'mechanical-facilities-brochure.pdf',
     fileUrl: mechanicalBrochurePdfUrl,
     pageCount: 28,
     coverImageUrl: mechanicalHvacImages.heatingCooling.brochurePage10,
@@ -146,7 +146,7 @@ let mockWebCatalogs: MockWebCatalog[] = [
     title: '군트너 제품 카탈로그',
     description: '군트너 응축기 및 공랭식 시스템 관련 주요 페이지를 웹카탈로그 형태로 전시한 샘플입니다.',
     category: '브랜드 카탈로그',
-    fileName: '국제티엔씨 카달로그 V2 25.08.05.pdf',
+    fileName: 'kookje-tnc-catalog-v2-25-08-05.pdf',
     fileUrl: companyCatalogPdfUrl,
     pageCount: 24,
     coverImageUrl: energyImages.guntner.catalogPages.common,
@@ -170,7 +170,7 @@ let mockWebCatalogs: MockWebCatalog[] = [
     title: '냉동 쇼케이스 라인업',
     description: '쇼케이스, 와인셀러, 유지보수 관련 페이지를 묶어 전시형으로 정리한 샘플입니다.',
     category: '제품 라인업',
-    fileName: '홈페이지 리뉴얼 가이드_260202.pdf',
+    fileName: 'website-renewal-guide-260202.pdf',
     fileUrl: renewalGuidePdfUrl,
     pageCount: 18,
     coverImageUrl: refrigerationSystemImages.builtInFrozenShowcase.catalogPage086,

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import hiwinSystemImage01 from '@/assets/images/1번이미지.jpg';
-import hiwinSystemImage02 from '@/assets/images/2번이미지.jpg';
-import hiwinSystemImage03 from '@/assets/images/3번이미지.jpg';
-import hiwinSystemImage04 from '@/assets/images/4번이미지.jpg';
+import hiwinSystemImage01 from '@/assets/images/image-01.jpg';
+import hiwinSystemImage02 from '@/assets/images/image-02.jpg';
+import hiwinSystemImage03 from '@/assets/images/image-03.jpg';
+import hiwinSystemImage04 from '@/assets/images/image-04.jpg';
 import { hiwinSystemSlides } from '@/features/haatzHome/data';
 
 describe('hiwinSystemSlides', () => {

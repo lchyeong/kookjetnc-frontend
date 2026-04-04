@@ -4,11 +4,11 @@ import newsImage2 from '@/assets/images/news/news_image2.jpg';
 import newsImage3 from '@/assets/images/news/news_image3.png';
 import newsImage4 from '@/assets/images/news/news_image4.webp';
 import newsImage5 from '@/assets/images/news/news_image5.jpg';
-import productImage01 from '@/assets/images/products/1.직결팬.png';
-import productImage11 from '@/assets/images/products/11.패널시스템.png';
-import productImage02 from '@/assets/images/products/2.냉각수펌프인버터.png';
-import productImage03 from '@/assets/images/products/3.문달기.png';
-import productImage04 from '@/assets/images/products/4.시스템에어컨.png';
+import productImage01 from '@/assets/images/products/1.direct-fan.png';
+import productImage11 from '@/assets/images/products/11.panel-system.png';
+import productImage02 from '@/assets/images/products/2.cooling-water-pump-inverter.png';
+import productImage03 from '@/assets/images/products/3.door-system.png';
+import productImage04 from '@/assets/images/products/4.system-air-conditioner.png';
 import type {
   HistoryDecadeMarker,
   HistoryEntry,

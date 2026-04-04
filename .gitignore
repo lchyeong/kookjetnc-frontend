@@ -16,6 +16,7 @@ dist-ssr
 playwright-report
 test-results
 .playwright-browsers/
+public/kookje-tnc-catalog-v2-25-08-05.pdf
 
 # Editor directories and files
 .vscode/*

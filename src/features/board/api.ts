@@ -181,9 +181,9 @@ interface MockTechnicalData extends TechnicalDataDetail {}
 
 const shouldUseBoardMocks = import.meta.env.VITE_ENABLE_MOCK === 'true';
 const mockAdminAccessToken = 'mock-admin-access-token';
-const technicalGuidePdfUrl = encodeURI('/홈페이지 리뉴얼 가이드_260202.pdf');
-const technicalCatalogPdfUrl = encodeURI('/국제티엔씨 카달로그 V2 25.08.05.pdf');
-const technicalBrochurePdfUrl = encodeURI('/최종본_기계설비브로셔_전체_작은파일.pdf');
+const technicalGuidePdfUrl = encodeURI('/website-renewal-guide-260202.pdf');
+const technicalCatalogPdfUrl = encodeURI('/kookje-tnc-catalog-v2-25-08-05.pdf');
+const technicalBrochurePdfUrl = encodeURI('/mechanical-facilities-brochure.pdf');
 const constructionCaseThumb01 = '/reference/hiwin-home/2026-03-25/img/main/con02_img01.jpg';
 const constructionCaseThumb02 = '/reference/hiwin-home/2026-03-25/img/main/con02_img02.jpg';
 const constructionCaseThumb03 = '/reference/hiwin-home/2026-03-25/img/main/con02_img03.jpg';
@@ -230,7 +230,7 @@ let mockResources: MockResource[] = [
     title: '회사 종합 카탈로그 PDF',
     description: '회사 소개와 사업 영역이 정리된 종합 카탈로그입니다.',
     category: '카탈로그',
-    fileName: '국제티엔씨 카달로그 V2 25.08.05.pdf',
+    fileName: 'kookje-tnc-catalog-v2-25-08-05.pdf',
     fileUrl: technicalCatalogPdfUrl,
     fileSize: 9_800_000,
     publishedAt: '2026-03-31T16:20:00',
@@ -244,7 +244,7 @@ let mockResources: MockResource[] = [
     title: '기계설비 브로슈어',
     description: '기계설비 라인업과 적용 범위를 정리한 브로슈어입니다.',
     category: '브로슈어',
-    fileName: '최종본_기계설비브로셔_전체_작은파일.pdf',
+    fileName: 'mechanical-facilities-brochure.pdf',
     fileUrl: technicalBrochurePdfUrl,
     fileSize: 3_200_000,
     publishedAt: '2026-03-24T10:15:00',
@@ -258,7 +258,7 @@ let mockResources: MockResource[] = [
     title: '내부 검토용 홈페이지 리뉴얼 가이드',
     description: '관리자용 검토 문서입니다.',
     category: '가이드',
-    fileName: '홈페이지 리뉴얼 가이드_260202.pdf',
+    fileName: 'website-renewal-guide-260202.pdf',
     fileUrl: technicalGuidePdfUrl,
     fileSize: 1_200_000,
     publishedAt: '2026-04-01T11:45:00',
@@ -383,7 +383,7 @@ let mockTechnicalDataList: MockTechnicalData[] = [
     title: '기계설비 브로셔',
     description: '주요 기계설비 라인업과 적용 분야를 정리한 브로셔입니다.',
     category: '브로셔',
-    fileName: '최종본_기계설비브로셔_전체_작은파일.pdf',
+    fileName: 'mechanical-facilities-brochure.pdf',
     fileUrl: technicalBrochurePdfUrl,
     fileSize: 3_200_000,
     viewCount: 228,
@@ -398,7 +398,7 @@ let mockTechnicalDataList: MockTechnicalData[] = [
     title: '국제티엔씨 카달로그',
     description: '주요 제품군과 시스템 구성을 한 번에 볼 수 있는 카달로그입니다.',
     category: '카달로그',
-    fileName: '국제티엔씨 카달로그 V2 25.08.05.pdf',
+    fileName: 'kookje-tnc-catalog-v2-25-08-05.pdf',
     fileUrl: technicalCatalogPdfUrl,
     fileSize: 9_800_000,
     viewCount: 311,
@@ -413,7 +413,7 @@ let mockTechnicalDataList: MockTechnicalData[] = [
     title: '홈페이지 리뉴얼 가이드',
     description: '메뉴 구조와 자료 구성 기준을 정리한 내부 참고 문서입니다.',
     category: '가이드',
-    fileName: '홈페이지 리뉴얼 가이드_260202.pdf',
+    fileName: 'website-renewal-guide-260202.pdf',
     fileUrl: technicalGuidePdfUrl,
     fileSize: 1_200_000,
     viewCount: 77,
