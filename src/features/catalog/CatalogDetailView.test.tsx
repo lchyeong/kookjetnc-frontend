@@ -12,12 +12,14 @@ import { useToastStore } from '@/stores/useToastStore';
 import styles from './CatalogDetailView.module.scss';
 
 const energyCategory = catalogCategories['energy-solution'];
-const mechanicalCategory = catalogCategories['mechanical-hvac'];
+const refrigerationCategory = catalogCategories['refrigeration-system'];
 const card = energyCategory.cards[0];
 const guntnerCard =
   energyCategory.cards.find((entry) => entry.slug === 'gutner-unit-cooler-high-flow') ??
   energyCategory.cards[1];
-const fallbackCard = mechanicalCategory.cards[0];
+const fallbackCard =
+  refrigerationCategory.cards.find((entry) => entry.detailImages === undefined) ??
+  refrigerationCategory.cards[0];
 let clipboardWriteText = vi.fn<() => Promise<void>>();
 
 const renderDetailView = (
@@ -90,8 +92,8 @@ describe('CatalogDetailView', () => {
   it('keeps the existing story card text layout for cards without detail image sequences', () => {
     renderDetailView(
       fallbackCard,
-      mechanicalCategory,
-      routePaths.catalogDetail(mechanicalCategory.id, fallbackCard.slug),
+      refrigerationCategory,
+      routePaths.catalogDetail(refrigerationCategory.id, fallbackCard.slug),
     );
 
     expect(screen.getAllByText(fallbackCard.model).length).toBeGreaterThan(0);

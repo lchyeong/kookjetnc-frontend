@@ -49,6 +49,12 @@ describe('catalog data', () => {
     const motorEntry = getCatalogEntry('energy-solution', 'motor-direct-control-system-smart-fan');
     const consultingEntry = getCatalogEntry('mechanical-hvac', 'operating-consulting-diagnostic');
     const controlEntry = getCatalogEntry('mechanical-hvac', 'automatic-control-bms');
+    const hvacEntry = getCatalogEntry('mechanical-hvac', 'hvac-facility-air-handler');
+    const heatingCoolingEntry = getCatalogEntry(
+      'mechanical-hvac',
+      'heating-cooling-facility-modular',
+    );
+    const plumbingEntry = getCatalogEntry('mechanical-hvac', 'plumbing-facility-hygiene');
     const engineeringEntry = getCatalogEntry(
       'refrigeration-system',
       'technical-design-specialized-construction-retail',
@@ -60,9 +66,13 @@ describe('catalog data', () => {
     );
     const ahuFilterCard = ahuFilterEntry?.card;
     const co2Card = co2Entry?.card;
+    const consultingCard = consultingEntry?.card;
     const guntnerCard = guntnerEntry?.card;
+    const hvacCard = hvacEntry?.card;
+    const heatingCoolingCard = heatingCoolingEntry?.card;
     const motorCard = motorEntry?.card;
     const openShowcaseDoorCard = openShowcaseDoorEntry?.card;
+    const plumbingCard = plumbingEntry?.card;
 
     expect(co2Entry).toBeDefined();
     expect(co2Entry?.category.id).toBe('energy-solution');
@@ -163,13 +173,67 @@ describe('catalog data', () => {
 
     expect(consultingEntry).toBeDefined();
     expect(consultingEntry?.category.id).toBe('mechanical-hvac');
-    expect(consultingEntry?.card.title).toBe('운영 컨설팅');
-    expect(consultingEntry?.card.slug).toBe('operating-consulting-diagnostic');
+    expect(consultingCard?.title).toBe('운영 컨설팅');
+    expect(consultingCard?.slug).toBe('operating-consulting-diagnostic');
+    expect(consultingCard?.model).toBe('냉난방 · 공조 · 위생 · 자동제어 통합 운영');
+    expect(consultingCard?.detailImages).toHaveLength(3);
+    expect(consultingCard?.detailImages?.[0]?.alt).toBe('기계·공조설비 사업영역 브로셔 이미지');
+    expect(consultingCard?.detailImages?.[1]?.alt).toBe('기계·공조설비 운영 컨설팅 브로셔 이미지');
+    expect(consultingCard?.detailImages?.[2]?.alt).toBe('기계·공조설비 리뉴얼 가이드 이미지');
+    expect(consultingCard?.highlights).toContain(
+      '사업영역 기준 냉난방 설비, 공조설비, 위생설비, 자동제어를 하나의 기계설비 체계로 연결해 검토합니다.',
+    );
+
+    expect(heatingCoolingEntry).toBeDefined();
+    expect(heatingCoolingEntry?.category.id).toBe('mechanical-hvac');
+    expect(heatingCoolingCard?.title).toBe('냉난방 설비');
+    expect(heatingCoolingCard?.slug).toBe('heating-cooling-facility-modular');
+    expect(heatingCoolingCard?.model).toBe('냉난방 설비 · 터보냉동기 · 냉각탑 · 보일러');
+    expect(heatingCoolingCard?.detailImages).toHaveLength(3);
+    expect(heatingCoolingCard?.detailImages?.[0]?.alt).toBe('냉난방 설비 브로셔 이미지');
+    expect(heatingCoolingCard?.detailImages?.[1]?.alt).toBe(
+      '터보냉동기·냉각탑·보일러 브로셔 이미지',
+    );
+    expect(heatingCoolingCard?.detailImages?.[2]?.alt).toBe('냉난방 설비 리뉴얼 가이드 이미지');
+    expect(heatingCoolingCard?.highlights).toContain(
+      '냉난방 장비의 성능 점검을 통해 장비 교체 및 시공·유지보수 공사를 수행하는 구조입니다.',
+    );
+
+    expect(hvacEntry).toBeDefined();
+    expect(hvacEntry?.category.id).toBe('mechanical-hvac');
+    expect(hvacCard?.title).toBe('공조설비');
+    expect(hvacCard?.slug).toBe('hvac-facility-air-handler');
+    expect(hvacCard?.model).toBe('공조설비 · 송풍기');
+    expect(hvacCard?.detailImages).toHaveLength(2);
+    expect(hvacCard?.detailImages?.[0]?.alt).toBe('공조설비 브로셔 이미지');
+    expect(hvacCard?.detailImages?.[1]?.alt).toBe('공조설비 리뉴얼 가이드 이미지');
+    expect(hvacCard?.highlights).toContain(
+      '공조기 시공 및 정비 유지보수 공사를 중심으로 운용하는 공조설비 항목입니다.',
+    );
+
+    expect(plumbingEntry).toBeDefined();
+    expect(plumbingEntry?.category.id).toBe('mechanical-hvac');
+    expect(plumbingCard?.title).toBe('위생설비');
+    expect(plumbingCard?.slug).toBe('plumbing-facility-hygiene');
+    expect(plumbingCard?.model).toBe('위생설비 · 급배수시설 · 기계실 조성');
+    expect(plumbingCard?.detailImages).toHaveLength(2);
+    expect(plumbingCard?.detailImages?.[0]?.alt).toBe('위생설비 브로셔 이미지');
+    expect(plumbingCard?.detailImages?.[1]?.alt).toBe('위생설비 리뉴얼 가이드 이미지');
+    expect(plumbingCard?.highlights).toContain(
+      '급배수시설 시공과 장비 교체, 유지보수 공사를 중심으로 구성된 위생설비 항목입니다.',
+    );
 
     expect(controlEntry).toBeDefined();
     expect(controlEntry?.category.id).toBe('mechanical-hvac');
     expect(controlEntry?.card.title).toBe('자동제어');
     expect(controlEntry?.card.slug).toBe('automatic-control-bms');
+    expect(controlEntry?.card.model).toBe('자동제어 공사 · 인버터 · 자동제어반');
+    expect(controlEntry?.card.detailImages).toHaveLength(2);
+    expect(controlEntry?.card.detailImages?.[0]?.alt).toBe('자동제어 브로셔 이미지');
+    expect(controlEntry?.card.detailImages?.[1]?.alt).toBe('자동제어 리뉴얼 가이드 이미지');
+    expect(controlEntry?.card.highlights).toContain(
+      '정밀 제어 시스템 구축과 체계적 운영 관리로 안정적이고 효율적인 운전 환경을 목표로 합니다.',
+    );
 
     expect(engineeringEntry).toBeDefined();
     expect(engineeringEntry?.category.id).toBe('refrigeration-system');

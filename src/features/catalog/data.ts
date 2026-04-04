@@ -3,6 +3,7 @@ import heroImage02 from '@/assets/images/2번이미지.jpg';
 import heroImage03 from '@/assets/images/3번이미지.jpg';
 import heroImage04 from '@/assets/images/4번이미지.jpg';
 import { energyImages } from '@/assets/images/energy';
+import { mechanicalHvacImages } from '@/assets/images/mechanical-hvac';
 import productImage01 from '@/assets/images/products/1.직결팬.png';
 import productImage10 from '@/assets/images/products/10.유니트쿨러.png';
 import productImage11 from '@/assets/images/products/11.패널시스템.png';
@@ -623,24 +624,25 @@ const mechanicalCards: CatalogCard[] = [
     id: 'operating-consulting-diagnostic',
     tabId: 'operating-consulting',
     title: '운영 컨설팅',
-    model: 'MH-OC-101/240',
+    model: '냉난방 · 공조 · 위생 · 자동제어 통합 운영',
     summary:
-      '설비 운전 이력, 현장 부하, BIM 검토를 함께 반영해 에너지 손실 구간과 개보수 우선순위를 정리하는 운영 컨설팅입니다.',
+      '냉난방 설비, 공조설비, 위생설비, 자동제어를 개별 공정이 아닌 하나의 운영 체계로 묶어 진단하고 개선 방향을 정리하는 통합 운영 컨설팅입니다.',
     detailDescription:
-      '운전 로그, 현장 점검, 설비 인터뷰, BIM 기반 배치 검토를 결합해 운영 병목 구간을 진단하고 단계별 개선안으로 정리합니다. 유지보수 동선, 장비 교체성, 배관 접근성까지 함께 검토해 이후 설계·시공·자동제어 개선까지 연결하기 위한 기초 데이터로 활용합니다.',
+      '브로셔 사업영역과 운영 컨설팅 기준으로 국제티엔씨 기계·공조설비는 냉난방 설비, 공조설비, 위생설비, 자동제어를 따로 보지 않고 연결된 운영 체계로 다룹니다. 현장 조건과 장비 상태를 함께 점검한 뒤 설계·시공·유지관리 우선순위를 정리하고, 비용 절감과 설비 효율 개선을 동시에 검토하는 통합 제안 구조로 이어집니다.',
     imageSrc: productImage05,
     imageAlt: '운영 컨설팅 이미지',
-    tags: ['#운영컨설팅', '#현장진단', '#BIM검토'],
+    tags: ['#운영컨설팅', '#기계공조통합', '#현장진단'],
     highlights: [
-      '운영 로그와 현장 인터뷰를 함께 분석하는 진단 프로세스',
-      'BIM 기반으로 유지보수 동선과 장비 접근성을 검토하는 분석 체계',
-      '후속 설계·시공 개선안까지 연결 가능한 진단 리포트 제공',
+      '사업영역 기준 냉난방 설비, 공조설비, 위생설비, 자동제어를 하나의 기계설비 체계로 연결해 검토합니다.',
+      '현장 분석과 장비 상태 점검을 바탕으로 설계·시공·유지관리 우선순위를 함께 정리합니다.',
+      '운영 컨설팅 단계에서 장비 효율 개선과 비용 절감을 함께 검토하는 제안 구조입니다.',
+      '후속 세부 공종 설계와 자동제어 연동 검토로 이어질 수 있는 상위 진단 성격의 패키지입니다.',
     ],
     metrics: [
-      { label: '수행 범위', value: '진단·BIM 검토' },
-      { label: '주요 대상', value: '상업·업무·물류 시설' },
-      { label: '산출물', value: '개선 로드맵·리뷰 리포트' },
-      { label: '후속 연계', value: '개선 설계 제안' },
+      { label: '적용 범위', value: '냉난방·공조·위생·자동제어' },
+      { label: '진행 방식', value: '현장 진단·운영 검토' },
+      { label: '핵심 목표', value: '효율 개선·비용 절감' },
+      { label: '후속 연계', value: '세부 설계·시공 제안' },
     ],
     gallery: createGallery(
       '운영 컨설팅',
@@ -648,6 +650,21 @@ const mechanicalCards: CatalogCard[] = [
       { src: productImage14 },
       { src: heroImage02 },
       { src: heroImage01 },
+    ),
+    detailImages: createGallery(
+      '기계·공조설비 운영 컨설팅',
+      {
+        src: mechanicalHvacImages.overview.brochurePage09BusinessArea,
+        alt: '기계·공조설비 사업영역 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.overview.brochurePage17OperatingConsulting,
+        alt: '기계·공조설비 운영 컨설팅 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.overview.guidePage21,
+        alt: '기계·공조설비 리뉴얼 가이드 이미지',
+      },
     ),
     filters: {
       discipline: ['consulting'],
@@ -659,30 +676,46 @@ const mechanicalCards: CatalogCard[] = [
     id: 'heating-cooling-facility-modular',
     tabId: 'heating-cooling-facility',
     title: '냉난방 설비',
-    model: 'MH-HC-330',
+    model: '냉난방 설비 · 터보냉동기 · 냉각탑 · 보일러',
     summary:
-      '공간별 부하를 고려해 냉난방 설비 모듈을 조합하고 운영 계절에 따라 유연하게 대응하는 설비 패키지입니다.',
+      '성능 점검을 기반으로 냉난방 설비, 터보냉동기, 냉각탑, 보일러의 교체와 시공, 유지보수까지 연결해 최적의 운전 효율을 확보하는 설비 패키지입니다.',
     detailDescription:
-      '실내 부하와 운영 시간대가 다른 복합 공간에서 효율적인 냉난방 제어를 구현하도록 설계한 모듈러 패키지입니다. 현장 규모와 계통 구성을 기준으로 단계적 확장도 가능합니다.',
+      '브로셔 기준 냉난방 설비는 성능 검검을 기반으로 정확한 설계와 시공 점검을 수행하고, 터보냉동기는 장비 상태별 맞춤 관리로 최적 성능과 에너지 절감을 함께 확보하는 구조입니다. 여기에 냉각탑 교체 및 유지보수, 보일러 교체 및 설치와 효율 유지관리까지 포함해 냉열원과 열원 설비를 하나의 운영 체계로 관리하는 방향으로 구성했습니다.',
     imageSrc: productImage04,
     imageAlt: '냉난방 설비 이미지',
-    tags: ['#냉난방설비', '#모듈러', '#복합공간'],
+    tags: ['#냉난방설비', '#터보냉동기', '#냉각탑보일러'],
     highlights: [
-      '공간별 부하 차이를 반영한 모듈 단위 설비 조합',
-      '계절별 운전 모드와 실사용 시간을 고려한 제어 시나리오',
-      '향후 증설을 고려한 단계적 확장 구조',
+      '냉난방 장비의 성능 점검을 통해 장비 교체 및 시공·유지보수 공사를 수행하는 구조입니다.',
+      '터보냉동기는 장비 상태별 맞춤 관리로 최적 성능 유지, 에너지 절감, 장비 수명 연장을 함께 목표로 합니다.',
+      '냉각탑은 부하별 최적 냉각효율 구현과 체계적 운전관리 중심으로 교체 및 유지보수 공사를 진행합니다.',
+      '보일러는 안전기준을 충족하는 교체·설치와 효율 유지관리를 통해 운영 비용 절감을 목표로 합니다.',
     ],
     metrics: [
-      { label: '적용 대상', value: '복합 상업시설' },
-      { label: '설계 방식', value: '모듈러 조합' },
-      { label: '운영 모드', value: '계절별 최적화' },
-      { label: '확장성', value: '단계별 증설 가능' },
+      { label: '핵심 설비', value: '냉동기·냉각탑·보일러' },
+      { label: '수행 범위', value: '점검·교체·시공·보수' },
+      { label: '운영 목표', value: '효율 유지·비용 절감' },
+      { label: '관리 포인트', value: '성능 점검 기반 운영' },
     ],
     gallery: createGallery(
       '냉난방 설비',
       { src: productImage04 },
       { src: productImage05 },
       { src: heroImage03 },
+    ),
+    detailImages: createGallery(
+      '냉난방 설비',
+      {
+        src: mechanicalHvacImages.heatingCooling.brochurePage10,
+        alt: '냉난방 설비 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.heatingCooling.brochurePage11,
+        alt: '터보냉동기·냉각탑·보일러 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.heatingCooling.guidePage22,
+        alt: '냉난방 설비 리뉴얼 가이드 이미지',
+      },
     ),
     filters: {
       discipline: ['heating-cooling'],
@@ -694,30 +727,42 @@ const mechanicalCards: CatalogCard[] = [
     id: 'hvac-facility-air-handler',
     tabId: 'hvac-facility',
     title: '공조설비',
-    model: 'MH-HV-220',
+    model: '공조설비 · 송풍기',
     summary:
-      '공기질과 열쾌적을 동시에 관리하기 위해 공조기, 덕트, 제어 연동을 통합 설계한 공조설비입니다.',
+      '공조기 시공과 정비, 유지보수는 물론 송풍기 설치·베어링·샤프트·오버홀 보수까지 포함해 용도별 실내환경과 에너지 절감을 함께 관리하는 공조설비입니다.',
     detailDescription:
-      '공조기와 배관, 덕트, 제어 설비를 통합 설계해 실내 환경의 안정성과 유지관리성을 동시에 확보하는 패키지입니다. 사용 영역에 따라 외기량과 회수열 전략을 조정할 수 있습니다.',
+      '브로셔 기준 공조설비는 공조기 시공 및 정비 유지보수 공사를 중심으로, 용도별 최적 설계와 정보 제어를 통해 에너지 절감과 쾌적한 실내환경을 제공하는 구조입니다. 함께 구성되는 송풍기는 급·배기 장비 설치, 베어링 교체, 샤프트 점검, 오버홀 등 유지보수 범위를 포함하며, 맞춤 제작과 풍량·정밀조정 시공으로 소음과 진동을 줄여 장비 신뢰성을 높이는 방향으로 정리했습니다.',
     imageSrc: productImage05,
     imageAlt: '공조설비 이미지',
-    tags: ['#공조설비', '#공기질', '#덕트시스템'],
+    tags: ['#공조설비', '#송풍기', '#실내환경제어'],
     highlights: [
-      '공조기, 덕트, 제어를 하나의 패키지로 통합 설계',
-      '실내 사용 특성에 따라 외기량과 회수열 전략을 조정',
-      '시운전 단계에서 공기질과 온열 환경을 함께 검증',
+      '공조기 시공 및 정비 유지보수 공사를 중심으로 운용하는 공조설비 항목입니다.',
+      '용도별 최적 설계와 정보 제어를 통해 에너지 절감과 쾌적한 실내환경 조성을 함께 목표로 합니다.',
+      '송풍기는 급·배기 장비 설치, 베어링, 샤프트, 오버홀 등 유지보수 범위를 포함합니다.',
+      '맞춤 제작과 풍량·정밀조정 시공으로 소음과 진동을 최소화하고 장비 신뢰성을 높입니다.',
     ],
     metrics: [
-      { label: '핵심 장비', value: '공조기·덕트' },
-      { label: '운영 목표', value: '공기질·쾌적도' },
-      { label: '지원 단계', value: '설계·시공·시운전' },
-      { label: '적용 공간', value: '오피스·상업시설' },
+      { label: '핵심 장비', value: '공조기·송풍기' },
+      { label: '수행 범위', value: '시공·정비·유지보수' },
+      { label: '운영 목표', value: '에너지 절감·쾌적성' },
+      { label: '관리 포인트', value: '풍량·소음·진동 제어' },
     ],
     gallery: createGallery(
       '공조설비',
       { src: productImage05 },
       { src: productImage04 },
       { src: heroImage02 },
+    ),
+    detailImages: createGallery(
+      '공조설비',
+      {
+        src: mechanicalHvacImages.hvac.brochurePage12,
+        alt: '공조설비 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.hvac.guidePage23,
+        alt: '공조설비 리뉴얼 가이드 이미지',
+      },
     ),
     filters: {
       discipline: ['air-conditioning'],
@@ -729,30 +774,42 @@ const mechanicalCards: CatalogCard[] = [
     id: 'plumbing-facility-hygiene',
     tabId: 'plumbing-facility',
     title: '위생설비',
-    model: 'MH-PL-120',
+    model: '위생설비 · 급배수시설 · 기계실 조성',
     summary:
-      '급배수와 위생기구 동선을 통합 검토해 사용 편의성과 유지관리 접근성을 함께 맞추는 위생설비입니다.',
+      '급배수시설 시공과 장비 교체, 유지보수 공사를 중심으로 강관·동관 배관, 급수·배수 배관, 기계실 조성, 급수가압펌프까지 포괄하는 위생설비입니다.',
     detailDescription:
-      '급수·배수 계통과 위생기구 배치를 함께 검토해 위생 동선과 설비 유지관리성을 동시에 확보합니다. 리뉴얼 현장의 제한 조건에 맞는 배관 개선안도 함께 제안합니다.',
+      '브로셔 기준 위생설비는 급배수시설 시공과 장비 교체, 유지 보수 공사를 수행하는 항목으로 정리되어 있습니다. 강관 배관, 동관 배관, 급수·배수 배관 시공과 배관 조인트 정비, 기계실 조성, 급배수 설비 라인 시공, 급수가압펌프 구성까지 포함해 위생기준에 맞춘 시공과 체계적 운영으로 안전한 수질 환경을 제공하는 방향으로 구성했습니다.',
     imageSrc: productImage09,
     imageAlt: '위생설비 이미지',
-    tags: ['#위생설비', '#급배수', '#리뉴얼'],
+    tags: ['#위생설비', '#급배수시설', '#기계실조성'],
     highlights: [
-      '위생 동선과 유지보수 접근성을 함께 고려한 급배수 설계',
-      '리뉴얼 현장에 맞는 배관 개선안 및 공정 순서 제안',
-      '기기 배치와 사용성 검토를 병행하는 설계 프로세스',
+      '급배수시설 시공과 장비 교체, 유지보수 공사를 중심으로 구성된 위생설비 항목입니다.',
+      '강관 배관, 동관 배관, 급수·배수 배관 시공을 현장 조건에 맞춰 수행합니다.',
+      '기계실 조성과 배관 조인트 정비를 포함해 설비 운영 안정성을 함께 확보합니다.',
+      '급수가압펌프와 급배수 설비 라인 구성을 통해 안전한 수질 환경 조성을 목표로 합니다.',
     ],
     metrics: [
-      { label: '설비 범위', value: '급수·배수·위생기구' },
-      { label: '적용 현장', value: '상업·업무시설' },
-      { label: '주요 포인트', value: '동선·유지관리' },
-      { label: '지원 단계', value: '설계·시공' },
+      { label: '핵심 설비', value: '급배수·가압펌프·기계실' },
+      { label: '수행 범위', value: '시공·교체·유지보수' },
+      { label: '운영 목표', value: '안전한 수질 환경' },
+      { label: '관리 포인트', value: '배관·조인트·설비라인' },
     ],
     gallery: createGallery(
       '위생설비',
       { src: productImage09 },
       { src: productImage14 },
       { src: heroImage04 },
+    ),
+    detailImages: createGallery(
+      '위생설비',
+      {
+        src: mechanicalHvacImages.plumbing.brochurePage13,
+        alt: '위생설비 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.plumbing.guidePage24,
+        alt: '위생설비 리뉴얼 가이드 이미지',
+      },
     ),
     filters: {
       discipline: ['plumbing'],
@@ -764,30 +821,42 @@ const mechanicalCards: CatalogCard[] = [
     id: 'automatic-control-bms',
     tabId: 'automatic-control',
     title: '자동제어',
-    model: 'MH-AC-450/550',
+    model: '자동제어 공사 · 인버터 · 자동제어반',
     summary:
-      '공조·냉난방·전력 데이터를 통합해 BMS와 원격 운영 환경에서 설비 상태와 알람을 한 번에 관리할 수 있는 자동제어입니다.',
+      '자동제어 시스템 구축과 인버터 설치, 자동제어반과 프로그램 운영, 현장 모니터링까지 포함해 안정적이고 효율적인 운전 환경을 구성하는 자동제어입니다.',
     detailDescription:
-      '현장에 이미 구축된 설비 데이터를 수집하고, 운영자가 필요한 알람과 이력 위젯을 중심으로 BMS 화면과 원격 모니터링 흐름을 함께 구성하는 자동제어 솔루션입니다. 확장 시 신규 계통 편입과 현장 대응 프로세스까지 함께 고려합니다.',
+      '브로셔 기준 자동제어는 정밀 제어 시스템 구축과 체계적 운영 관리를 통해 안정적이고 효율적인 운전 환경을 제공하는 항목입니다. 자동제어반 설치와 프로그램 구성, 인버터 제작과 시공, 자동제어 판넬과 케이블 시공, 현장 운영 관리와 모니터링까지 이어지는 흐름으로 정리되어 있으며, 설비 운전 상태를 실시간으로 확인하고 운영 대응 속도를 높이는 방향으로 구성했습니다.',
     imageSrc: productImage02,
     imageAlt: '자동제어 이미지',
-    tags: ['#자동제어', '#BMS', '#원격운영'],
+    tags: ['#자동제어', '#인버터', '#자동제어반'],
     highlights: [
-      '설비 상태와 알람을 한 화면에서 관리하는 운영자 중심 BMS 구성',
-      '원격 운영과 현장 대응 흐름을 함께 반영한 자동제어 구조',
-      '이력 데이터 기반의 점검 우선순위 판단 지원',
+      '정밀 제어 시스템 구축과 체계적 운영 관리로 안정적이고 효율적인 운전 환경을 목표로 합니다.',
+      '자동제어반 설치와 프로그램 구성으로 현장 장비 상태를 제어하고 모니터링합니다.',
+      '인버터 제작과 시공, 판넬·케이블 시공까지 포함한 자동제어 공사 범위를 다룹니다.',
+      '현장 운영 관리와 자동제어 모니터링을 통해 설비 대응 속도와 관리 정확도를 높입니다.',
     ],
     metrics: [
-      { label: '연동 범위', value: '공조·냉난방·전력' },
-      { label: '운영 화면', value: 'BMS·원격 모니터링' },
-      { label: '주요 기능', value: '알람·이력·분석' },
-      { label: '확장성', value: '신규 설비 편입 가능' },
+      { label: '핵심 설비', value: '인버터·자동제어반·판넬' },
+      { label: '수행 범위', value: '설치·시공·운영관리' },
+      { label: '운영 목표', value: '안정성·효율성 확보' },
+      { label: '관리 포인트', value: '제어·모니터링·대응속도' },
     ],
     gallery: createGallery(
       '자동제어',
       { src: productImage02 },
       { src: productImage01 },
       { src: heroImage03 },
+    ),
+    detailImages: createGallery(
+      '자동제어',
+      {
+        src: mechanicalHvacImages.automaticControl.brochurePage14,
+        alt: '자동제어 브로셔 이미지',
+      },
+      {
+        src: mechanicalHvacImages.automaticControl.guidePage25,
+        alt: '자동제어 리뉴얼 가이드 이미지',
+      },
     ),
     filters: {
       discipline: ['control'],
@@ -1000,10 +1069,10 @@ export const catalogCategories = {
       backgroundImageSrc: heroImage02,
       eyebrow: '기계·공조설비',
       title: '기계·공조설비',
-      subtitle: '설계, 시공, 자동제어까지 이어지는 국제티엔씨 기계·공조설비 카탈로그',
+      subtitle: '냉난방, 공조, 위생, 자동제어를 통합 설계·시공·운영하는 국제티엔씨 기계·공조설비',
       description:
-        '하츠 레퍼런스의 화면 구조와 상호작용을 유지하면서, 국제티엔씨 기계·공조설비 항목을 기준으로 재구성한 임시 목록 페이지입니다.',
-      spotlight: ['통합 설계', '현장 시공', '운전 최적화'],
+        '브로셔 사업영역 구조를 기준으로 냉난방 설비, 공조설비, 위생설비, 자동제어를 개별 공종이 아닌 연결된 운영 체계로 재구성했습니다. 현장 분석부터 설계·시공, 제어 연동과 유지관리까지 한 흐름으로 탐색할 수 있도록 정리했습니다.',
+      spotlight: ['냉난방·공조 통합', '위생·자동제어 연동', '현장 분석 기반 운영'],
     },
     tabs: mechanicalTabs,
     filterGroups: mechanicalFilterGroups,
