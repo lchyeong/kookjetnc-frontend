@@ -2,6 +2,7 @@ import { energyImages } from '@/assets/images/energy';
 import { mechanicalHvacImages } from '@/assets/images/mechanical-hvac';
 import { refrigerationSystemImages } from '@/assets/images/refrigeration-system';
 import { http } from '@/api/http';
+import { withBoardReadFallback } from '@/features/board/requestFallback';
 
 export interface WebCatalogPreviewPage {
   id: number;
@@ -396,41 +397,53 @@ export const webCatalogQueryKeys = {
 };
 
 export const fetchWebCatalogs = async (): Promise<WebCatalogSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchWebCatalogs();
-  }
-
-  const response = await http.get<BackendWebCatalogSummary[]>('/api/v1/web-catalogs');
-  return response.map(mapBackendSummary);
+  return withBoardReadFallback({
+    apiRequest: async () => {
+      const response = await http.get<BackendWebCatalogSummary[]>('/api/v1/web-catalogs');
+      return response.map(mapBackendSummary);
+    },
+    fallbackRequest: mockFetchWebCatalogs,
+    label: 'web catalogs list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchWebCatalog = async (webCatalogId: number): Promise<WebCatalogDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchWebCatalog(webCatalogId);
-  }
-
-  const response = await http.get<BackendWebCatalogDetail>(`/api/v1/web-catalogs/${webCatalogId}`);
-  return mapBackendDetail(response);
+  return withBoardReadFallback({
+    apiRequest: async () => {
+      const response = await http.get<BackendWebCatalogDetail>(`/api/v1/web-catalogs/${webCatalogId}`);
+      return mapBackendDetail(response);
+    },
+    fallbackRequest: () => mockFetchWebCatalog(webCatalogId),
+    label: `web catalog detail:${String(webCatalogId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminWebCatalogs = async (): Promise<AdminWebCatalogSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminWebCatalogs();
-  }
-
-  const response = await http.get<BackendAdminWebCatalogSummary[]>('/api/v1/admin/web-catalogs');
-  return response.map(mapBackendAdminSummary);
+  return withBoardReadFallback({
+    apiRequest: async () => {
+      const response = await http.get<BackendAdminWebCatalogSummary[]>('/api/v1/admin/web-catalogs');
+      return response.map(mapBackendAdminSummary);
+    },
+    fallbackRequest: mockFetchAdminWebCatalogs,
+    label: 'admin web catalogs list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminWebCatalog = async (webCatalogId: number): Promise<WebCatalogDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminWebCatalog(webCatalogId);
-  }
-
-  const response = await http.get<BackendWebCatalogDetail>(
-    `/api/v1/admin/web-catalogs/${webCatalogId}`,
-  );
-  return mapBackendDetail(response);
+  return withBoardReadFallback({
+    apiRequest: async () => {
+      const response = await http.get<BackendWebCatalogDetail>(
+        `/api/v1/admin/web-catalogs/${webCatalogId}`,
+      );
+      return mapBackendDetail(response);
+    },
+    fallbackRequest: () => mockFetchAdminWebCatalog(webCatalogId),
+    label: `admin web catalog detail:${String(webCatalogId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const createWebCatalog = async (

@@ -1,4 +1,5 @@
 import { http } from '@/api/http';
+import { withBoardReadFallback } from '@/features/board/requestFallback';
 
 export interface NoticeSummary {
   id: number;
@@ -1199,105 +1200,118 @@ export const logoutAdminSession = async (): Promise<void> => {
 };
 
 export const fetchNotices = async (): Promise<NoticeSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchNotices();
-  }
-
-  return http.get<NoticeSummary[]>('/api/v1/notices');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<NoticeSummary[]>('/api/v1/notices'),
+    fallbackRequest: mockFetchNotices,
+    label: 'notices list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchNotice = async (noticeId: number): Promise<NoticeDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchNotice(noticeId);
-  }
-
-  return http.get<NoticeDetail>(`/api/v1/notices/${noticeId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<NoticeDetail>(`/api/v1/notices/${noticeId}`),
+    fallbackRequest: () => mockFetchNotice(noticeId),
+    label: `notice detail:${String(noticeId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchResources = async (): Promise<ResourceSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchResources();
-  }
-
-  return http.get<ResourceSummary[]>('/api/v1/resources');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<ResourceSummary[]>('/api/v1/resources'),
+    fallbackRequest: mockFetchResources,
+    label: 'resources list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchResource = async (resourceId: number): Promise<ResourceDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchResource(resourceId);
-  }
-
-  return http.get<ResourceDetail>(`/api/v1/resources/${resourceId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<ResourceDetail>(`/api/v1/resources/${resourceId}`),
+    fallbackRequest: () => mockFetchResource(resourceId),
+    label: `resource detail:${String(resourceId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchConstructionCases = async (): Promise<ConstructionCaseSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchConstructionCases();
-  }
-
-  return http.get<ConstructionCaseSummary[]>('/api/v1/construction-cases');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<ConstructionCaseSummary[]>('/api/v1/construction-cases'),
+    fallbackRequest: mockFetchConstructionCases,
+    label: 'construction cases list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchConstructionCase = async (
   constructionCaseId: number,
 ): Promise<ConstructionCaseDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchConstructionCase(constructionCaseId);
-  }
-
-  return http.get<ConstructionCaseDetail>(`/api/v1/construction-cases/${constructionCaseId}`);
+  return withBoardReadFallback({
+    apiRequest: () =>
+      http.get<ConstructionCaseDetail>(`/api/v1/construction-cases/${constructionCaseId}`),
+    fallbackRequest: () => mockFetchConstructionCase(constructionCaseId),
+    label: `construction case detail:${String(constructionCaseId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchProjectRecords = async (): Promise<ProjectRecordSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchProjectRecords();
-  }
-
-  return http.get<ProjectRecordSummary[]>('/api/v1/project-records');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<ProjectRecordSummary[]>('/api/v1/project-records'),
+    fallbackRequest: mockFetchProjectRecords,
+    label: 'project records list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchProjectRecord = async (
   projectRecordId: number,
 ): Promise<ProjectRecordDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchProjectRecord(projectRecordId);
-  }
-
-  return http.get<ProjectRecordDetail>(`/api/v1/project-records/${projectRecordId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<ProjectRecordDetail>(`/api/v1/project-records/${projectRecordId}`),
+    fallbackRequest: () => mockFetchProjectRecord(projectRecordId),
+    label: `project record detail:${String(projectRecordId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchTechnicalDataList = async (): Promise<TechnicalDataSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchTechnicalDataList();
-  }
-
-  return http.get<TechnicalDataSummary[]>('/api/v1/technical-data');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<TechnicalDataSummary[]>('/api/v1/technical-data'),
+    fallbackRequest: mockFetchTechnicalDataList,
+    label: 'technical data list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchTechnicalData = async (
   technicalDataId: number,
 ): Promise<TechnicalDataDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchTechnicalData(technicalDataId);
-  }
-
-  return http.get<TechnicalDataDetail>(`/api/v1/technical-data/${technicalDataId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<TechnicalDataDetail>(`/api/v1/technical-data/${technicalDataId}`),
+    fallbackRequest: () => mockFetchTechnicalData(technicalDataId),
+    label: `technical data detail:${String(technicalDataId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminNotices = async (): Promise<AdminNoticeSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminNotices();
-  }
-
-  return http.get<AdminNoticeSummary[]>('/api/v1/admin/notices');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<AdminNoticeSummary[]>('/api/v1/admin/notices'),
+    fallbackRequest: mockFetchAdminNotices,
+    label: 'admin notices list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminNotice = async (noticeId: number): Promise<NoticeDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminNotice(noticeId);
-  }
-
-  return http.get<NoticeDetail>(`/api/v1/admin/notices/${noticeId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<NoticeDetail>(`/api/v1/admin/notices/${noticeId}`),
+    fallbackRequest: () => mockFetchAdminNotice(noticeId),
+    label: `admin notice detail:${String(noticeId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const createNotice = async (input: NoticeMutationInput): Promise<NoticeDetail> => {
@@ -1328,19 +1342,21 @@ export const deleteNotice = async (noticeId: number): Promise<void> => {
 };
 
 export const fetchAdminResources = async (): Promise<AdminResourceSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminResources();
-  }
-
-  return http.get<AdminResourceSummary[]>('/api/v1/admin/resources');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<AdminResourceSummary[]>('/api/v1/admin/resources'),
+    fallbackRequest: mockFetchAdminResources,
+    label: 'admin resources list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminResource = async (resourceId: number): Promise<ResourceDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminResource(resourceId);
-  }
-
-  return http.get<ResourceDetail>(`/api/v1/admin/resources/${resourceId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<ResourceDetail>(`/api/v1/admin/resources/${resourceId}`),
+    fallbackRequest: () => mockFetchAdminResource(resourceId),
+    label: `admin resource detail:${String(resourceId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const createResource = async (
@@ -1376,41 +1392,45 @@ export const deleteResource = async (resourceId: number): Promise<void> => {
 };
 
 export const fetchAdminConstructionCases = async (): Promise<AdminConstructionCaseSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminConstructionCases();
-  }
-
-  return http.get<AdminConstructionCaseSummary[]>('/api/v1/admin/construction-cases');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<AdminConstructionCaseSummary[]>('/api/v1/admin/construction-cases'),
+    fallbackRequest: mockFetchAdminConstructionCases,
+    label: 'admin construction cases list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminConstructionCase = async (
   constructionCaseId: number,
 ): Promise<ConstructionCaseDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminConstructionCase(constructionCaseId);
-  }
-
-  return http.get<ConstructionCaseDetail>(
-    `/api/v1/admin/construction-cases/${constructionCaseId}`,
-  );
+  return withBoardReadFallback({
+    apiRequest: () =>
+      http.get<ConstructionCaseDetail>(`/api/v1/admin/construction-cases/${constructionCaseId}`),
+    fallbackRequest: () => mockFetchAdminConstructionCase(constructionCaseId),
+    label: `admin construction case detail:${String(constructionCaseId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminProjectRecords = async (): Promise<AdminProjectRecordSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminProjectRecords();
-  }
-
-  return http.get<AdminProjectRecordSummary[]>('/api/v1/admin/project-records');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<AdminProjectRecordSummary[]>('/api/v1/admin/project-records'),
+    fallbackRequest: mockFetchAdminProjectRecords,
+    label: 'admin project records list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminProjectRecord = async (
   projectRecordId: number,
 ): Promise<ProjectRecordDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminProjectRecord(projectRecordId);
-  }
-
-  return http.get<ProjectRecordDetail>(`/api/v1/admin/project-records/${projectRecordId}`);
+  return withBoardReadFallback({
+    apiRequest: () =>
+      http.get<ProjectRecordDetail>(`/api/v1/admin/project-records/${projectRecordId}`),
+    fallbackRequest: () => mockFetchAdminProjectRecord(projectRecordId),
+    label: `admin project record detail:${String(projectRecordId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const createProjectRecord = async (
@@ -1443,21 +1463,23 @@ export const deleteProjectRecord = async (projectRecordId: number): Promise<void
 };
 
 export const fetchAdminTechnicalDataList = async (): Promise<AdminTechnicalDataSummary[]> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminTechnicalDataList();
-  }
-
-  return http.get<AdminTechnicalDataSummary[]>('/api/v1/admin/technical-data');
+  return withBoardReadFallback({
+    apiRequest: () => http.get<AdminTechnicalDataSummary[]>('/api/v1/admin/technical-data'),
+    fallbackRequest: mockFetchAdminTechnicalDataList,
+    label: 'admin technical data list',
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const fetchAdminTechnicalData = async (
   technicalDataId: number,
 ): Promise<TechnicalDataDetail> => {
-  if (shouldUseBoardMocks) {
-    return mockFetchAdminTechnicalData(technicalDataId);
-  }
-
-  return http.get<TechnicalDataDetail>(`/api/v1/admin/technical-data/${technicalDataId}`);
+  return withBoardReadFallback({
+    apiRequest: () => http.get<TechnicalDataDetail>(`/api/v1/admin/technical-data/${technicalDataId}`),
+    fallbackRequest: () => mockFetchAdminTechnicalData(technicalDataId),
+    label: `admin technical data detail:${String(technicalDataId)}`,
+    useMock: shouldUseBoardMocks,
+  });
 };
 
 export const createTechnicalData = async (
