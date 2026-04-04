@@ -77,10 +77,6 @@ const createPlaceholderLink = (label = '준비 중입니다') => {
   } satisfies HaatzLink;
 };
 
-const createPlaceholderLinks = (labels: string[]) => {
-  return labels.map((label) => createPlaceholderLink(label));
-};
-
 const createInternalLink = (to: string, label: string) => {
   return {
     href: to,
@@ -111,6 +107,13 @@ const createCatalogMenuLinks = (categorySlug: CatalogCategorySlug) => {
 const energySolutionLinks = createCatalogMenuLinks('energy-solution');
 const mechanicalHvacLinks = createCatalogMenuLinks('mechanical-hvac');
 const refrigerationSystemLinks = createCatalogMenuLinks('refrigeration-system');
+const performanceInfoSupportLinks = [
+  createInternalLink(routePaths.constructionCases, '시공사례'),
+  createInternalLink(routePaths.projectRecords, '공사실적'),
+  createInternalLink(routePaths.technicalData, '기술자료'),
+  createInternalLink(routePaths.webCatalogs, '웹카탈로그'),
+  createPlaceholderLink('홍보영상'),
+];
 const companyLinksWithHistoryRoute = [
   {
     href: routePaths.aboutGreeting,
@@ -187,14 +190,8 @@ export const headerMenuGroups: HeaderMenuGroup[] = [
     href: MENU_PLACEHOLDER_HREF,
     descriptionTitle: '실적·정보지원',
     description: '실적 자료와 정보지원 메뉴를\n새 분류 기준으로\n정리하고 있습니다.',
-    hoverItems: createPlaceholderLinks([
-      '시공사례',
-      '공사실적',
-      '기술자료',
-      '웹카탈로그',
-      '홍보영상',
-    ]),
-    items: createPlaceholderLinks(['시공사례', '공사실적', '기술자료', '웹카탈로그', '홍보영상']),
+    hoverItems: performanceInfoSupportLinks,
+    items: performanceInfoSupportLinks,
   },
 ];
 

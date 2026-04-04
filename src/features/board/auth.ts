@@ -1,23 +1,36 @@
-export const ADMIN_ACCESS_TOKEN_STORAGE_KEY = 'kookjetnc.admin.accessToken';
+import {
+  ADMIN_ACCESS_TOKEN_STORAGE_KEY,
+  useAdminAuthStore,
+} from '@/stores/useAdminAuthStore';
+
+export { ADMIN_ACCESS_TOKEN_STORAGE_KEY };
+
+export const MOCK_ADMIN_ACCESS_TOKEN = 'mock-admin-access-token';
+
+export const isMockAdminEnabled = () => {
+  return import.meta.env.VITE_ENABLE_MOCK === 'true';
+};
 
 export const getAdminAccessToken = (): string | null => {
-  if (typeof window === 'undefined') return null;
-
-  return window.localStorage.getItem(ADMIN_ACCESS_TOKEN_STORAGE_KEY);
+  return useAdminAuthStore.getState().accessToken;
 };
 
 export const setAdminAccessToken = (token: string) => {
-  if (typeof window === 'undefined') return;
+  useAdminAuthStore.getState().setAccessToken(token);
+};
 
-  window.localStorage.setItem(ADMIN_ACCESS_TOKEN_STORAGE_KEY, token);
+export const setMockAdminAccessToken = () => {
+  setAdminAccessToken(MOCK_ADMIN_ACCESS_TOKEN);
 };
 
 export const clearAdminAccessToken = () => {
-  if (typeof window === 'undefined') return;
-
-  window.localStorage.removeItem(ADMIN_ACCESS_TOKEN_STORAGE_KEY);
+  useAdminAuthStore.getState().clearSession();
 };
 
 export const hasAdminAccessToken = () => {
-  return Boolean(getAdminAccessToken());
+  return useAdminAuthStore.getState().hasSession();
+};
+
+export const isMockAdminSession = () => {
+  return getAdminAccessToken() === MOCK_ADMIN_ACCESS_TOKEN;
 };

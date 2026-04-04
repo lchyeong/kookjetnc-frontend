@@ -6,7 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import Button from '@/components/ui/Button/Button';
 import { loginAdmin } from '@/features/board/api';
-import { hasAdminAccessToken, setAdminAccessToken } from '@/features/board/auth';
+import {
+  hasAdminAccessToken,
+  isMockAdminEnabled,
+  setAdminAccessToken,
+  setMockAdminAccessToken,
+} from '@/features/board/auth';
 import { getApiErrorMessage } from '@/features/board/utils';
 import styles from '@/pages/AdminBoardPage.module.scss';
 import { routePaths } from '@/routes/routeRegistry';
@@ -21,7 +26,7 @@ const AdminLoginPage = () => {
     mutationFn: loginAdmin,
     onSuccess: (response) => {
       setAdminAccessToken(response.accessToken);
-      void navigate(routePaths.adminNotices, { replace: true });
+      void navigate(routePaths.adminWebCatalogs, { replace: true });
     },
     onError: (error) => {
       setErrorMessage(getApiErrorMessage(error));
@@ -30,7 +35,7 @@ const AdminLoginPage = () => {
 
   useEffect(() => {
     if (hasAdminAccessToken()) {
-      void navigate(routePaths.adminNotices, { replace: true });
+      void navigate(routePaths.adminWebCatalogs, { replace: true });
     }
   }, [navigate]);
 
@@ -40,15 +45,22 @@ const AdminLoginPage = () => {
     loginMutation.mutate({ username, password });
   };
 
+  const handleMockEnter = () => {
+    setErrorMessage(null);
+    setMockAdminAccessToken();
+    void navigate(routePaths.adminWebCatalogs, { replace: true });
+  };
+
   return (
-    <div className={styles['shell']}>
+    <div className={styles['loginShell']}>
       <div className={styles['page']}>
-        <section className={styles['panel']}>
-          <p className={styles['eyebrow']}>Admin Login</p>
-          <h1 className={styles['sectionTitle']}>게시판 관리자 로그인</h1>
-          <p className={styles['sectionDescription']}>
-            공지사항과 자료실 게시물을 등록, 수정, 삭제할 수 있습니다.
-          </p>
+        <section className={styles['loginPanel']}>
+          <div className={styles['loginHeader']}>
+            <h1 className={styles['loginTitle']}>관리자 로그인</h1>
+            <Link className={styles['link']} to={routePaths.home}>
+              메인으로 돌아가기
+            </Link>
+          </div>
 
           <form className={styles['form']} onSubmit={handleSubmit}>
             <div className={styles['field']}>
@@ -80,13 +92,30 @@ const AdminLoginPage = () => {
               />
             </div>
 
+            {isMockAdminEnabled() ? (
+              <p className={styles['helper']}>
+                현재는 목 환경이므로 서버 없이도 바로 관리자 화면을 확인할 수 있습니다.
+              </p>
+            ) : null}
+
             {errorMessage ? <div className={styles['error']}>{errorMessage}</div> : null}
 
             <div className={styles['formActions']}>
-              <Link className={styles['link']} to={routePaths.home}>
-                메인으로 돌아가기
-              </Link>
-              <Button disabled={loginMutation.isPending} type='submit'>
+              {isMockAdminEnabled() ? (
+                <Button
+                  className={styles['adminSecondaryButton']}
+                  onClick={handleMockEnter}
+                  type='button'
+                  variant='secondary'
+                >
+                  임시 입장
+                </Button>
+              ) : null}
+              <Button
+                className={styles['adminPrimaryButton']}
+                disabled={loginMutation.isPending}
+                type='submit'
+              >
                 {loginMutation.isPending ? '로그인 중...' : '로그인'}
               </Button>
             </div>

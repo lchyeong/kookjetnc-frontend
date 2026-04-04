@@ -59,6 +59,11 @@ describe('catalog data', () => {
       'refrigeration-system',
       'technical-design-specialized-construction-retail',
     );
+    const maintenanceEntry = getCatalogEntry(
+      'refrigeration-system',
+      'maintenance-service-monitoring',
+    );
+    const seafoodEntry = getCatalogEntry('refrigeration-system', 'seafood-cold-chain-system-fresh');
     const openShowcaseDoorEntry = getCatalogEntry('energy-solution', 'open-showcase-door-retrofit');
     const showcaseEntry = getCatalogEntry(
       'refrigeration-system',
@@ -73,6 +78,9 @@ describe('catalog data', () => {
     const motorCard = motorEntry?.card;
     const openShowcaseDoorCard = openShowcaseDoorEntry?.card;
     const plumbingCard = plumbingEntry?.card;
+    const engineeringCard = engineeringEntry?.card;
+    const maintenanceCard = maintenanceEntry?.card;
+    const seafoodCard = seafoodEntry?.card;
 
     expect(co2Entry).toBeDefined();
     expect(co2Entry?.category.id).toBe('energy-solution');
@@ -237,13 +245,69 @@ describe('catalog data', () => {
 
     expect(engineeringEntry).toBeDefined();
     expect(engineeringEntry?.category.id).toBe('refrigeration-system');
-    expect(engineeringEntry?.card.title).toBe('기술설계 · 전문시공');
-    expect(engineeringEntry?.card.slug).toBe('technical-design-specialized-construction-retail');
+    expect(engineeringCard?.title).toBe('기술설계 · 전문시공');
+    expect(engineeringCard?.slug).toBe('technical-design-specialized-construction-retail');
+    expect(engineeringCard?.model).toBe('냉동·냉장 설비 Total Solution');
+    expect(engineeringCard?.detailImages).toHaveLength(2);
+    expect(engineeringCard?.detailImages?.[0]?.alt).toBe('냉동냉장시스템 사업영역 카탈로그 이미지');
+    expect(engineeringCard?.detailImages?.[1]?.alt).toBe('기술설계 전문시공 리뉴얼 가이드 이미지');
+    expect(engineeringCard?.highlights).toContain(
+      '냉동·냉장 설비 시스템 설계와 신기술 제안·도입 지원을 함께 수행하는 기술 컨설팅 영역입니다.',
+    );
+
+    expect(seafoodEntry).toBeDefined();
+    expect(seafoodEntry?.category.id).toBe('refrigeration-system');
+    expect(seafoodCard?.title).toBe('수산물 콜드체인시스템');
+    expect(seafoodCard?.slug).toBe('seafood-cold-chain-system-fresh');
+    expect(seafoodCard?.model).toBe('제빙·저빙시설 콜드체인 운영');
+    expect(seafoodCard?.detailImages).toHaveLength(1);
+    expect(seafoodCard?.detailImages?.[0]?.alt).toBe('수산물 콜드체인시스템 리뉴얼 가이드 이미지');
+    expect(seafoodCard?.highlights).toContain(
+      '제빙·저빙시설 전체 레이아웃 설계를 통해 공간 구성과 운영 동선을 먼저 정리하는 구조입니다.',
+    );
+
+    expect(maintenanceEntry).toBeDefined();
+    expect(maintenanceEntry?.category.id).toBe('refrigeration-system');
+    expect(maintenanceCard?.title).toBe('유지보수 서비스');
+    expect(maintenanceCard?.slug).toBe('maintenance-service-monitoring');
+    expect(maintenanceCard?.model).toBe('원스톱 대응 · 전국 서비스 네트워크');
+    expect(maintenanceCard?.detailImages).toHaveLength(2);
+    expect(maintenanceCard?.detailImages?.[0]?.alt).toBe('유지보수 서비스 카탈로그 이미지');
+    expect(maintenanceCard?.detailImages?.[1]?.alt).toBe('유지보수 서비스 리뉴얼 가이드 이미지');
+    expect(maintenanceCard?.highlights).toContain(
+      '접수 후 3시간 내 전문기사 현장 출동 알림 서비스를 핵심 운영 기준으로 제시합니다.',
+    );
 
     expect(showcaseEntry).toBeDefined();
     expect(showcaseEntry?.category.id).toBe('refrigeration-system');
     expect(showcaseEntry?.card.title).toBe('내치형 냉동 쇼케이스');
     expect(showcaseEntry?.card.slug).toBe('built-in-frozen-showcase-reach-in');
+    expect(showcaseEntry?.card.model).toBe('직냉식 H890 · 인버터 겸용 · SD-W 글라스형');
+    expect(showcaseEntry?.card.detailImages).toHaveLength(5);
+    expect(showcaseEntry?.card.detailImages?.[0]?.alt).toBe(
+      '내치형 냉동 쇼케이스 직냉식 카탈로그 이미지',
+    );
+    expect(showcaseEntry?.card.detailImages?.[4]?.alt).toBe(
+      '내치형 냉동 쇼케이스 리뉴얼 가이드 이미지',
+    );
+    expect(showcaseEntry?.card.highlights).toContain(
+      '인버터 냉동냉장 겸용 평대는 업계 최초 광폭형 글라스 패널과 30% 이상 에너지 절전형 에코디자인, ICE-Free 시스템을 핵심 특장점으로 제시합니다.',
+    );
+
+    const wineCellarEntry = getCatalogEntry('refrigeration-system', 'showcase-wine-cellar-premium');
+    const wineCellarCard = wineCellarEntry?.card;
+
+    expect(wineCellarEntry).toBeDefined();
+    expect(wineCellarEntry?.category.id).toBe('refrigeration-system');
+    expect(wineCellarCard?.title).toBe('프리미엄 와인셀러');
+    expect(wineCellarCard?.slug).toBe('showcase-wine-cellar-premium');
+    expect(wineCellarCard?.model).toBe('2DOOR · 3DOOR · 4DOOR 빌트인 와인셀러');
+    expect(wineCellarCard?.detailImages).toHaveLength(6);
+    expect(wineCellarCard?.detailImages?.[0]?.alt).toBe('프리미엄 와인셀러 특장점 카탈로그 이미지');
+    expect(wineCellarCard?.detailImages?.[5]?.alt).toBe('프리미엄 와인셀러 랙 진열 이미지');
+    expect(wineCellarCard?.highlights).toContain(
+      '밀폐형 도어와 무열선 3중 페어글라스로 일정한 온도 관리와 결로 방지를 동시에 확보합니다.',
+    );
 
     expect(
       getCatalogEntry('energy-solution', 'co2-natural-refrigerant-system-logistics'),

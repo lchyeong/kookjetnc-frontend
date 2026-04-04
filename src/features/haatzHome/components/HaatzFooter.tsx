@@ -1,9 +1,14 @@
+import { useRef } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import {
   footerInfoItems,
   footerPolicyLinks,
   headerAssets,
   headerMenuGroups,
 } from '@/features/haatzHome/data';
+import { routePaths } from '@/routes/routeRegistry';
 import { classNames } from '@/utils/classNames';
 
 import styles from './HaatzFooter.module.scss';
@@ -30,6 +35,25 @@ const footerPrimaryMenuLabels = headerMenuGroups.map((group) => {
 });
 
 const HaatzFooter = ({ className }: HaatzFooterProps) => {
+  const navigate = useNavigate();
+  const adminEntryClicksRef = useRef<number[]>([]);
+
+  const handleAdminEntryClick = () => {
+    const now = Date.now();
+    const recentClicks = adminEntryClicksRef.current.filter((timestamp) => {
+      return now - timestamp <= 2500;
+    });
+    recentClicks.push(now);
+    adminEntryClicksRef.current = recentClicks;
+
+    if (recentClicks.length < 5) {
+      return;
+    }
+
+    adminEntryClicksRef.current = [];
+    navigate(routePaths.adminLogin);
+  };
+
   return (
     <footer className={classNames(styles['footer'], className)}>
       <div className={styles['inner']}>
@@ -86,7 +110,13 @@ const HaatzFooter = ({ className }: HaatzFooterProps) => {
         </div>
 
         <div className={styles['bottomRow']}>
-          <p>Copyright ⓒ 2024 ㈜국제티엔씨. All Right Reserved.</p>
+          <button
+            className={styles['copyrightTrigger']}
+            onClick={handleAdminEntryClick}
+            type='button'
+          >
+            Copyright ⓒ 2024 ㈜국제티엔씨. All Right Reserved.
+          </button>
           <a href='https://www.newzeststudio.com' rel='noreferrer' target='_blank'>
             Built By newzest studio.
           </a>

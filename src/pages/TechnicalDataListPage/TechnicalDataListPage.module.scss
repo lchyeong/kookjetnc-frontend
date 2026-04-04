@@ -1,0 +1,203 @@
+.listShell {
+  margin-top: 28px;
+  background: #ffffff;
+  box-shadow: 0 16px 42px rgb(0 0 0 / 5%);
+}
+
+.emptyState {
+  padding: 28px;
+  color: #667780;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.9fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 22px 28px;
+}
+
+.row {
+  border-top: 1px solid rgb(15 23 32 / 10%);
+}
+
+.row:first-child {
+  border-top: 0;
+}
+
+.main {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  color: #0f1720;
+  font-size: 1.24rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgb(0 84 105 / 8%);
+  color: var(--kookje-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.description {
+  margin: 0;
+  color: #586770;
+  font-size: 0.98rem;
+  line-height: 1.72;
+}
+
+.meta {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.metaLine {
+  color: #52616a;
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.metaLabel {
+  display: block;
+  margin-bottom: 2px;
+  color: #87949b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.link {
+  color: var(--kookje-primary);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.fileIcons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fileIconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 10px;
+  border: 1px solid rgb(15 23 32 / 12%);
+  border-radius: 14px;
+  background: #f8fbfc;
+  color: #0f1720;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.fileIconLink:hover {
+  border-color: rgb(0 84 105 / 24%);
+  color: var(--kookje-primary);
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.pageButton {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid rgb(15 23 32 / 12%);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #32414a;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pageButton[data-active='true'] {
+  border-color: transparent;
+  background: #0f1720;
+  color: #ffffff;
+}
+
+.pageButton:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+@media (width <= 960px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (width <= 768px) {
+  .listShell {
+    margin-top: 20px;
+  }
+
+  .row,
+  .emptyState {
+    padding: 20px 24px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .pagination {
+    gap: 8px;
+  }
+
+  .pageButton {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 12px;
+  }
+}

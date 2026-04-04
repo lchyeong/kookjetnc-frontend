@@ -17,7 +17,6 @@ const ResourceListPage = () => {
     return (
       <PlaceholderPage
         description='자료실 목록을 불러오는 중입니다.'
-        eyebrow='Resources'
         title='잠시만 기다려 주세요.'
       />
     );
@@ -27,7 +26,6 @@ const ResourceListPage = () => {
     return (
       <PlaceholderPage
         description={getApiErrorMessage(resourceQuery.error)}
-        eyebrow='Resources'
         title='자료실을 불러오지 못했습니다.'
       />
     );
@@ -38,11 +36,7 @@ const ResourceListPage = () => {
   return (
     <div className={styles['page']}>
       <section className={styles['hero']}>
-        <p className={styles['eyebrow']}>Resource Library</p>
         <h1 className={styles['title']}>자료실</h1>
-        <p className={styles['description']}>
-          업로드된 파일 메타데이터와 다운로드 링크를 실제 API로 조회합니다.
-        </p>
       </section>
 
       <section className={styles['list']}>
@@ -54,20 +48,20 @@ const ResourceListPage = () => {
 
         {resources.map((resource) => (
           <article className={styles['card']} key={resource.id}>
-            <div className={styles['splitActions']}>
-              <div className={styles['actions']}>
-                <span className={styles['pill']}>{resource.category}</span>
-                <span className={styles['meta']}>{formatPublishedDate(resource.publishedAt)}</span>
-              </div>
-              <span className={styles['meta']}>
-                {resource.fileName} · {formatFileSize(resource.fileSize)}
-              </span>
+            <div className={styles['actions']}>
+              <span className={styles['pill']}>{resource.category}</span>
             </div>
             <h2>{resource.title}</h2>
             <p className={styles['description']}>{resource.description}</p>
-            <div className={styles['detailActions']}>
+            <div className={styles['splitActions']}>
+              <span className={styles['meta']}>
+                {resource.fileName} · {formatFileSize(resource.fileSize)} ·{' '}
+                {formatPublishedDate(resource.publishedAt)}
+              </span>
+            </div>
+            <div className={styles['cardActions']}>
               <Link className={styles['link']} to={routePaths.resourceDetail(resource.id)}>
-                상세 보기
+                상세보기
               </Link>
               <a
                 className={styles['link']}

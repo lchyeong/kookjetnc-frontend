@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
@@ -6,7 +7,11 @@ import styles from '@/features/haatzHome/components/HaatzFooter.module.scss';
 
 describe('HaatzFooter', () => {
   it('renders the updated kookje footer information while removing family site and social areas', () => {
-    render(<HaatzFooter />);
+    render(
+      <MemoryRouter>
+        <HaatzFooter />
+      </MemoryRouter>,
+    );
 
     expect(screen.getByText('회사소개')).toBeInTheDocument();
     expect(screen.getByText('에너지솔루션')).toBeInTheDocument();

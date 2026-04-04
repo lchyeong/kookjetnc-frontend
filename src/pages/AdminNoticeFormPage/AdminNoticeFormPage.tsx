@@ -192,7 +192,11 @@ const AdminNoticeFormPage = () => {
           <Link className={styles['link']} to={routePaths.adminNotices}>
             취소
           </Link>
-          <Button disabled={mutation.isPending} type='submit'>
+          <Button
+            className={styles['adminPrimaryButton']}
+            disabled={mutation.isPending}
+            type='submit'
+          >
             {mutation.isPending ? '저장 중...' : isEditMode ? '수정 저장' : '등록'}
           </Button>
         </div>

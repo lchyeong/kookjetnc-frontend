@@ -155,7 +155,7 @@ describe('router', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: '설계, 시공, 자동제어까지 이어지는 국제티엔씨 기계·공조설비 카탈로그',
+        name: '냉난방, 공조, 위생, 자동제어를 통합 설계·시공·운영하는 국제티엔씨 기계·공조설비',
       }),
     ).toBeInTheDocument();
     expect(document.body).toHaveTextContent('총 5개 상품');

@@ -125,10 +125,6 @@ const HaatzHeader = ({ heroSectionSelector, isHomeRoute = false }: HaatzHeaderPr
     setExpandedMobileGroups([DEFAULT_MOBILE_GROUP_ID]);
   };
 
-  const isCurrentLink = (link: HaatzLink) => {
-    return Boolean(link.to) && link.to === `${location.pathname}${location.search}`;
-  };
-
   const isCurrentGroupRoute = (group: HeaderMenuGroup) => {
     const groupPath = getInternalPath(group);
 
@@ -139,7 +135,14 @@ const HaatzHeader = ({ heroSectionSelector, isHomeRoute = false }: HaatzHeaderPr
       return true;
     }
 
-    return group.items.some((item) => isCurrentLink(item));
+    return group.items.some((item) => {
+      const itemPath = getInternalPath(item);
+
+      return Boolean(
+        itemPath &&
+          (location.pathname === itemPath || location.pathname.startsWith(`${itemPath}/`)),
+      );
+    });
   };
 
   useEffect(() => {

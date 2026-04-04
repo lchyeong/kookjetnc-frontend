@@ -84,6 +84,16 @@
   line-height: 1.6;
 }
 
+.copyrightTrigger {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
 .bottomRow a {
   margin-left: 12px;
   color: rgba(255, 255, 255, 0.7);

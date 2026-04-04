@@ -34,7 +34,7 @@ const expectedSubmenuLabels = {
     '수산물 콜드체인시스템',
     '유지보수 서비스',
     '내치형 냉동 쇼케이스',
-    '쇼케이스 와인셀러',
+    '프리미엄 와인셀러',
   ],
 } as const;
 
@@ -192,10 +192,52 @@ describe('haatz header menu data', () => {
         expect(group.isPlaceholder).toBe(true);
         expect(group.href).toBe('#');
         expect(group.to).toBeUndefined();
-        expect(group.hoverItems.every((item) => item.href === '#' && item.isPlaceholder)).toBe(
+        expect(group.hoverItems[0]).toMatchObject({
+          href: routePaths.constructionCases,
+          label: '시공사례',
+          to: routePaths.constructionCases,
+        });
+        expect(group.items[0]).toMatchObject({
+          href: routePaths.constructionCases,
+          label: '시공사례',
+          to: routePaths.constructionCases,
+        });
+        expect(group.hoverItems[1]).toMatchObject({
+          href: routePaths.projectRecords,
+          label: '공사실적',
+          to: routePaths.projectRecords,
+        });
+        expect(group.items[1]).toMatchObject({
+          href: routePaths.projectRecords,
+          label: '공사실적',
+          to: routePaths.projectRecords,
+        });
+        expect(group.hoverItems[2]).toMatchObject({
+          href: routePaths.technicalData,
+          label: '기술자료',
+          to: routePaths.technicalData,
+        });
+        expect(group.items[2]).toMatchObject({
+          href: routePaths.technicalData,
+          label: '기술자료',
+          to: routePaths.technicalData,
+        });
+        expect(group.hoverItems[3]).toMatchObject({
+          href: routePaths.webCatalogs,
+          label: '웹카탈로그',
+          to: routePaths.webCatalogs,
+        });
+        expect(group.items[3]).toMatchObject({
+          href: routePaths.webCatalogs,
+          label: '웹카탈로그',
+          to: routePaths.webCatalogs,
+        });
+        expect(group.hoverItems.slice(4).every((item) => item.href === '#' && item.isPlaceholder)).toBe(
           true,
         );
-        expect(group.items.every((item) => item.href === '#' && item.isPlaceholder)).toBe(true);
+        expect(group.items.slice(4).every((item) => item.href === '#' && item.isPlaceholder)).toBe(
+          true,
+        );
         continue;
       }
 

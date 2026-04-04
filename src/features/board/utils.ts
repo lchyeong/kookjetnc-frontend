@@ -3,8 +3,11 @@ import { ApiError } from '@/api/errors';
 export const formatPublishedDate = (value: string): string => {
   return new Intl.DateTimeFormat('ko-KR', {
     dateStyle: 'long',
-    timeStyle: 'short',
   }).format(new Date(value));
+};
+
+export const formatPublishedDateOnly = (value: string): string => {
+  return formatPublishedDate(value);
 };
 
 export const formatFileSize = (value: number): string => {
@@ -17,6 +20,10 @@ export const formatFileSize = (value: number): string => {
   }
 
   return `${value} B`;
+};
+
+export const formatCount = (value: number): string => {
+  return new Intl.NumberFormat('ko-KR').format(value);
 };
 
 export const toDatetimeLocalValue = (value: string): string => {

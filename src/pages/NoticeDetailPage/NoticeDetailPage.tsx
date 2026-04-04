@@ -22,7 +22,6 @@ const NoticeDetailPage = () => {
     return (
       <PlaceholderPage
         description='공지사항 식별자가 전달되지 않았습니다.'
-        eyebrow='Notice'
         title='잘못된 요청입니다.'
       />
     );
@@ -32,7 +31,6 @@ const NoticeDetailPage = () => {
     return (
       <PlaceholderPage
         description='공지사항 상세 정보를 불러오는 중입니다.'
-        eyebrow='Notice'
         title='잠시만 기다려 주세요.'
       />
     );
@@ -42,7 +40,6 @@ const NoticeDetailPage = () => {
     return (
       <PlaceholderPage
         description={getApiErrorMessage(noticeQuery.error)}
-        eyebrow='Notice'
         secondary={<Link to={routePaths.notices}>공지사항 목록으로 돌아가기</Link>}
         title='공지사항을 불러오지 못했습니다.'
       />
@@ -55,7 +52,6 @@ const NoticeDetailPage = () => {
     return (
       <PlaceholderPage
         description='공지사항 데이터를 찾지 못했습니다.'
-        eyebrow='Notice'
         secondary={<Link to={routePaths.notices}>공지사항 목록으로 돌아가기</Link>}
         title='공지사항을 불러오지 못했습니다.'
       />

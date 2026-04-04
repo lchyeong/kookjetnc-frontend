@@ -17,9 +17,8 @@ const card = energyCategory.cards[0];
 const guntnerCard =
   energyCategory.cards.find((entry) => entry.slug === 'gutner-unit-cooler-high-flow') ??
   energyCategory.cards[1];
-const fallbackCard =
-  refrigerationCategory.cards.find((entry) => entry.detailImages === undefined) ??
-  refrigerationCategory.cards[0];
+const { detailImages: _unusedDetailImages, ...fallbackCardBase } = refrigerationCategory.cards[0];
+const fallbackCard: CatalogCard = fallbackCardBase;
 let clipboardWriteText = vi.fn<() => Promise<void>>();
 
 const renderDetailView = (

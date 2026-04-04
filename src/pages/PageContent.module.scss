@@ -5,12 +5,9 @@
 }
 
 .hero {
-  padding: 40px;
-  border: 1px solid rgb(0 84 105 / 12%);
+  padding: 28px 28px 24px;
   border-radius: 28px;
-  background:
-    linear-gradient(135deg, rgb(0 84 105 / 7%), transparent 60%),
-    linear-gradient(180deg, #ffffff, #f4fbfc);
+  background: #ffffff;
   box-shadow: 0 24px 60px rgb(0 0 0 / 6%);
 }
 
@@ -27,7 +24,18 @@
   margin: 0;
   color: #0f1720;
   font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+}
+
+.card :global(h2) {
+  margin: 0;
+  color: #0f1720;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.28;
 }
 
 .description {
@@ -44,8 +52,10 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding: 28px;
-  border: 1px solid rgb(15 23 32 / 8%);
   border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 16px 42px rgb(0 0 0 / 5%);
@@ -78,7 +88,6 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 18px;
   color: var(--kookje-primary);
   font-weight: 700;
   text-decoration: none;
@@ -104,12 +113,20 @@
   margin-top: 28px;
 }
 
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
 .splitActions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  margin-top: auto;
 }
 
 @media (width <= 768px) {

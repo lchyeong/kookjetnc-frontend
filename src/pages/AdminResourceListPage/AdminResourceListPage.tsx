@@ -59,7 +59,11 @@ const AdminResourceListPage = () => {
             파일 업로드와 공개 상태를 함께 관리합니다.
           </p>
         </div>
-        <Button onClick={() => navigate(routePaths.adminResourceCreate)} type='button'>
+        <Button
+          className={styles['adminPrimaryButton']}
+          onClick={() => navigate(routePaths.adminResourceCreate)}
+          type='button'
+        >
           자료 등록
         </Button>
       </div>
@@ -107,6 +111,7 @@ const AdminResourceListPage = () => {
                         수정
                       </Link>
                       <Button
+                        className={styles['adminDangerButton']}
                         onClick={() => handleDelete(resource.id)}
                         size='sm'
                         type='button'

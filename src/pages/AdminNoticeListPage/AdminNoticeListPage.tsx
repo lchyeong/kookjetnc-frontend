@@ -59,7 +59,11 @@ const AdminNoticeListPage = () => {
             고정 여부와 공개 여부를 함께 관리합니다.
           </p>
         </div>
-        <Button onClick={() => navigate(routePaths.adminNoticeCreate)} type='button'>
+        <Button
+          className={styles['adminPrimaryButton']}
+          onClick={() => navigate(routePaths.adminNoticeCreate)}
+          type='button'
+        >
           공지사항 작성
         </Button>
       </div>
@@ -103,6 +107,7 @@ const AdminNoticeListPage = () => {
                         수정
                       </Link>
                       <Button
+                        className={styles['adminDangerButton']}
                         onClick={() => handleDelete(notice.id)}
                         size='sm'
                         type='button'

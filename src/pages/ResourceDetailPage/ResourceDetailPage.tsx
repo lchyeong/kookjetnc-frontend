@@ -22,7 +22,6 @@ const ResourceDetailPage = () => {
     return (
       <PlaceholderPage
         description='자료 식별자가 전달되지 않았습니다.'
-        eyebrow='Resources'
         title='잘못된 요청입니다.'
       />
     );
@@ -32,7 +31,6 @@ const ResourceDetailPage = () => {
     return (
       <PlaceholderPage
         description='자료 상세 정보를 불러오는 중입니다.'
-        eyebrow='Resources'
         title='잠시만 기다려 주세요.'
       />
     );
@@ -42,7 +40,6 @@ const ResourceDetailPage = () => {
     return (
       <PlaceholderPage
         description={getApiErrorMessage(resourceQuery.error)}
-        eyebrow='Resources'
         secondary={<Link to={routePaths.resources}>자료실 목록으로 돌아가기</Link>}
         title='자료를 불러오지 못했습니다.'
       />
@@ -55,7 +52,6 @@ const ResourceDetailPage = () => {
     return (
       <PlaceholderPage
         description='자료 데이터를 찾지 못했습니다.'
-        eyebrow='Resources'
         secondary={<Link to={routePaths.resources}>자료실 목록으로 돌아가기</Link>}
         title='자료를 불러오지 못했습니다.'
       />

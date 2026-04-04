@@ -53,7 +53,7 @@ const REFRIGERATION_SUBMENU_LABELS = [
   '수산물 콜드체인시스템',
   '유지보수 서비스',
   '내치형 냉동 쇼케이스',
-  '쇼케이스 와인셀러',
+  '프리미엄 와인셀러',
 ] as const;
 const PERFORMANCE_SUPPORT_SUBMENU_LABELS = [
   '시공사례',
